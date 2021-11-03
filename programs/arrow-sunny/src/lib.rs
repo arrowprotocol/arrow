@@ -34,15 +34,22 @@ pub mod arrow_sunny {
         ctx.accounts.init_arrow(bump)
     }
 
-    /// Initializes the [Arrow]'s miners.
+    /// Initializes the [Arrow]'s internal miner.
     #[access_control(ctx.accounts.validate())]
-    pub fn init_arrow_miners(
-        ctx: Context<InitArrowMiners>,
-        vendor_miner_bump: u8,
+    pub fn init_arrow_internal_miner(
+        ctx: Context<InitArrowMiner>,
         internal_miner_bump: u8,
     ) -> ProgramResult {
-        ctx.accounts
-            .init_arrow_miners(vendor_miner_bump, internal_miner_bump)
+        ctx.accounts.init_arrow_internal_miner(internal_miner_bump)
+    }
+
+    /// Initializes the [Arrow]'s vendor miner.
+    #[access_control(ctx.accounts.validate())]
+    pub fn init_arrow_vendor_miner(
+        ctx: Context<InitArrowMiner>,
+        vendor_miner_bump: u8,
+    ) -> ProgramResult {
+        ctx.accounts.init_arrow_vendor_miner(vendor_miner_bump)
     }
 
     /// Stakes tokens into an [Arrow].
@@ -143,7 +150,7 @@ pub struct NewArrow<'info> {
 
 /// Accounts for [arrow_sunny::init_arrow_miners].
 #[derive(Accounts)]
-pub struct InitArrowMiners<'info> {
+pub struct InitArrowMiner<'info> {
     /// The [Arrow].
     #[account(mut)]
     pub arrow: Box<Account<'info, Arrow>>,
@@ -156,10 +163,8 @@ pub struct InitArrowMiners<'info> {
     /// The Sunny vault.
     pub vault: Box<Account<'info, Vault>>,
 
-    /// The Internal miner to create.
-    pub internal_miner: InitMiner<'info>,
-    /// The Vendor miner to create.
-    pub vendor_miner: InitMiner<'info>,
+    /// The miner to create.
+    pub miner: InitMiner<'info>,
 
     /// Mine program.
     pub mine_program: Program<'info, quarry_mine::program::QuarryMine>,
