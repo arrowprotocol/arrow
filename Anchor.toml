@@ -1,0 +1,23 @@
+anchor_version = "0.18.0"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "tests/dummy.json"
+
+[scripts]
+test = "yarn mocha"
+
+[programs.mainnet]
+arrow_sunny = "ARoWLTBWoWrKMvxEiaE2EH9DrWyV7mLpKywGDWxBGeq9"
+
+[programs.devnet]
+arrow_sunny = "ARoWLTBWoWrKMvxEiaE2EH9DrWyV7mLpKywGDWxBGeq9"
+
+[programs.testnet]
+arrow_sunny = "ARoWLTBWoWrKMvxEiaE2EH9DrWyV7mLpKywGDWxBGeq9"
+
+[programs.localnet]
+arrow_sunny = "ARoWLTBWoWrKMvxEiaE2EH9DrWyV7mLpKywGDWxBGeq9"
