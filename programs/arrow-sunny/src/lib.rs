@@ -148,7 +148,7 @@ pub struct NewArrow<'info> {
     pub system_program: Program<'info, System>,
 }
 
-/// Accounts for [arrow_sunny::init_arrow_miners].
+/// Accounts for [arrow_sunny::init_arrow_vendor_miner] and [arrow_sunny::init_arrow_internal_miner].
 #[derive(Accounts)]
 pub struct InitArrowMiner<'info> {
     /// The [Arrow].
@@ -176,7 +176,7 @@ pub struct InitArrowMiner<'info> {
     pub token_program: Program<'info, Token>,
 }
 
-/// Miner accounts used in [arrow_sunny::init_arrow_miners].
+/// Miner accounts used in [arrow_sunny::init_arrow_vendor_miner] and [arrow_sunny::init_arrow_internal_miner].
 #[derive(Accounts)]
 pub struct InitMiner<'info> {
     /// Rewarder

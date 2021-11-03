@@ -1,4 +1,4 @@
-//! [crate::arrow_sunny::init_arrow_miners] instruction processor.
+//! [arrow_sunny::init_arrow_vendor_miner] and [arrow_sunny::init_arrow_internal_miner] instruction processor.
 
 use crate::*;
 use anchor_lang::prelude::*;
