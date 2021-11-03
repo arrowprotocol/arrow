@@ -5,7 +5,7 @@ use anchor_lang::prelude::*;
 use vipers::{assert_ata, assert_keys_eq, validate::Validate};
 
 impl<'info> InitArrowMiner<'info> {
-    /// Initializes the miners.
+    /// Initializes the internal miner.
     pub fn init_arrow_internal_miner(&mut self, internal_miner_bump: u8) -> ProgramResult {
         self.validate_init_internal()?;
         let arrow = &mut self.arrow;
@@ -15,7 +15,7 @@ impl<'info> InitArrowMiner<'info> {
         Ok(())
     }
 
-    /// Initializes the miners.
+    /// Initializes the vendor miner.
     pub fn init_arrow_vendor_miner(&mut self, vendor_miner_bump: u8) -> ProgramResult {
         self.validate_init_vendor()?;
         let arrow = &mut self.arrow;
