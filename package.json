@@ -1,6 +1,6 @@
 {
   "name": "@arrowprotocol/arrow",
-  "version": "0.0.20",
+  "version": "0.1.0",
   "description": "Arrow allows issuing staking derivatives to redirect yields.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

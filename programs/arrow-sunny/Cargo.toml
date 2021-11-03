@@ -1,6 +1,6 @@
 [package]
 name = "arrow-sunny"
-version = "0.0.20"
+version = "0.1.0"
 description = "Sunny protocol integration for Arrow."
 edition = "2018"
 homepage = "https://arrowprotocol.com"
@@ -24,7 +24,7 @@ anchor-lang = ">=0.17.0"
 anchor-spl = ">=0.17.0"
 quarry-mine = { version = "1.10.0", features = ["cpi"] }
 quarry-mint-wrapper = { version = "1.10.0", features = ["cpi"] }
-sunny-anchor = { version = "0.0.1", path = "../../lib/sunny", features = [
+sunny-anchor = { version = "0.1.0", path = "../../lib/sunny", features = [
     "cpi"
 ] }
 num-traits = "0.2"

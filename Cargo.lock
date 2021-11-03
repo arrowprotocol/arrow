@@ -204,7 +204,7 @@ checksum = "23b62fc65de8e4e7f52534fb52b0f3ed04746ae267519eef2a83941e8085068b"
 
 [[package]]
 name = "arrow-sunny"
-version = "0.0.20"
+version = "0.1.0"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -1314,7 +1314,7 @@ checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
 
 [[package]]
 name = "sunny-anchor"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "anchor-lang",
  "anchor-spl",

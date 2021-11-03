@@ -1,6 +1,6 @@
 [package]
 name = "sunny-anchor"
-version = "0.0.1"
+version = "0.1.0"
 description = "Sunny Aggregator Anchor client."
 edition = "2018"
 homepage = "https://arrowprotocol.com"
