@@ -28,10 +28,11 @@ Arrow's first integration is with the [Sunny Aggregator](https://sunny.ag). As S
 
 ## Packages
 
-| Package                | Description                           | Version                                                                                                             | Docs                                                                                          |
-| :--------------------- | :------------------------------------ | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------- |
-| `arrow-sunny`          | Sunny protocol integration for Arrow. | [![Crates.io](https://img.shields.io/crates/v/arrow-sunny)](https://crates.io/crates/arrow-sunny)                   | [![Docs.rs](https://docs.rs/arrow-sunny/badge.svg)](https://docs.rs/arrow-sunny)              |
-| `@arrowprotocol/arrow` | TypeScript SDK for Arrow              | [![npm](https://img.shields.io/npm/v/@arrowprotocol/arrow.svg)](https://www.npmjs.com/package/@arrowprotocol/arrow) | [![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://docs.arrowprotocol.com/ts/) |
+| Package                | Description                                                          | Version                                                                                                             | Docs                                                                                          |
+| :--------------------- | :------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------- |
+| `arrow-sunny`          | Sunny protocol integration for Arrow.                                | [![Crates.io](https://img.shields.io/crates/v/arrow-sunny)](https://crates.io/crates/arrow-sunny)                   | [![Docs.rs](https://docs.rs/arrow-sunny/badge.svg)](https://docs.rs/arrow-sunny)              |
+| `sunny-anchor`         | Anchor crate to integrate with [Sunny Aggregator](https://sunny.ag). | [![Crates.io](https://img.shields.io/crates/v/sunny-anchor)](https://crates.io/crates/sunny-anchor)                 | [![Docs.rs](https://docs.rs/sunny-anchor/badge.svg)](https://docs.rs/sunny-anchor)            |
+| `@arrowprotocol/arrow` | TypeScript SDK for Arrow                                             | [![npm](https://img.shields.io/npm/v/@arrowprotocol/arrow.svg)](https://www.npmjs.com/package/@arrowprotocol/arrow) | [![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://docs.arrowprotocol.com/ts/) |
 
 ## Note
 
