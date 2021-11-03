@@ -199,24 +199,37 @@ export class Arrow {
         pool: sunnyPool,
         vault,
         vendorMint: pool.vendorMint,
-        internalMiner: {
-          rewarder: SUNNY_REWARDER_KEY,
-          quarry: internalQuarry,
-          miner: internalMiner,
-          minerVault: internalMinerATA.address,
-          tokenMint: pool.internalMint,
-        },
-        vendorMiner: {
-          rewarder: pool.rewarder,
-          quarry: pool.quarry,
-          miner: vendorMiner,
-          minerVault: vendorMinerATA.address,
-          tokenMint: pool.vendorMint,
-        },
         mineProgram: QUARRY_ADDRESSES.Mine,
         tokenProgram: TOKEN_PROGRAM_ID,
         sunnyProgram: SUNNY_PROGRAM,
       },
+    };
+    const internalMinerAccounts = {
+      rewarder: SUNNY_REWARDER_KEY,
+      quarry: internalQuarry,
+      miner: internalMiner,
+      minerVault: internalMinerATA.address,
+      tokenMint: pool.internalMint,
+    };
+    const vendorMinerAccounts = {
+      rewarder: pool.rewarder,
+      quarry: pool.quarry,
+      miner: vendorMiner,
+      minerVault: vendorMinerATA.address,
+      tokenMint: pool.vendorMint,
+    };
+
+    const initArrowMinerCommon = {
+      arrow,
+      payer,
+
+      pool: sunnyPool,
+      vault,
+
+      mineProgram: QUARRY_ADDRESSES.Mine,
+      sunnyProgram: SUNNY_PROGRAM,
+      systemProgram: SystemProgram.programId,
+      tokenProgram: TOKEN_PROGRAM_ID,
     };
 
     const newArrowIX = this.programs.ArrowSunny.instruction.newArrow(
@@ -224,11 +237,16 @@ export class Arrow {
       vaultBump,
       newArrowCtx
     );
-    const initArrowMinersIX =
-      this.programs.ArrowSunny.instruction.initArrowMiners(
-        vendorBump,
+    const initVendorMinerIX =
+      this.programs.ArrowSunny.instruction.initArrowVendorMiner(vendorBump, {
+        accounts: { ...initArrowMinerCommon, miner: vendorMinerAccounts },
+      });
+    const initInternalMinerIX =
+      this.programs.ArrowSunny.instruction.initArrowInternalMiner(
         internalBump,
-        newArrowCtx
+        {
+          accounts: { ...initArrowMinerCommon, miner: internalMinerAccounts },
+        }
       );
 
     const vendorMintRaw = await this.provider.getAccountInfo(pool.vendorMint);
@@ -256,7 +274,8 @@ export class Arrow {
       ),
       newArrowTX: new TransactionEnvelope(this.provider, [
         newArrowIX,
-        initArrowMinersIX,
+        initVendorMinerIX,
+        initInternalMinerIX,
       ]),
     };
   }
