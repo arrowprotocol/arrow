@@ -27,3 +27,10 @@ export const SUNNY_PROGRAM = new PublicKey(
 export const SUNNY_REWARDER_KEY = new PublicKey(
   "97PmYbGpSHSrKrUkQX793mjpA2EA9rrQKkHsQuvenU44"
 );
+
+/**
+ * Key of the Sunny creator.
+ */
+export const SUNNY_CREATOR_KEY = new PublicKey(
+  "7iAxSFR2dgHxcaASBjAkktgiwPDUYCZYmKz7QAektZ4B"
+);

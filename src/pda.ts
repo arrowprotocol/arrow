@@ -1,7 +1,7 @@
 import { utils } from "@project-serum/anchor";
 import { PublicKey } from "@solana/web3.js";
 
-import { ARROW_ADDRESSES, SUNNY_PROGRAM } from "./constants";
+import { ARROW_ADDRESSES, SUNNY_CREATOR_KEY, SUNNY_PROGRAM } from "./constants";
 
 /**
  * Generates the canonical Bank PDA.
@@ -37,10 +37,6 @@ export const generateSunnyVaultAddress = async ({
   );
 };
 
-const CREATOR_KEY = new PublicKey(
-  "7iAxSFR2dgHxcaASBjAkktgiwPDUYCZYmKz7QAektZ4B"
-);
-
 export const generateSunnyPoolAddress = async ({
   quarry,
 }: {
@@ -49,7 +45,7 @@ export const generateSunnyPoolAddress = async ({
   return await PublicKey.findProgramAddress(
     [
       utils.bytes.utf8.encode("SunnyQuarryPool"),
-      CREATOR_KEY.toBuffer(),
+      SUNNY_CREATOR_KEY.toBuffer(),
       quarry.toBuffer(),
     ],
     SUNNY_PROGRAM
