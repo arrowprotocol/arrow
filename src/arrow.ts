@@ -207,7 +207,7 @@ export class Arrow {
       },
     };
     const internalMinerAccounts = {
-      rewarder: SUNNY_REWARDER_KEY,
+      rewarder: sunnyRewarderKey,
       quarry: internalQuarry,
       miner: internalMiner,
       minerVault: internalMinerATA.address,
