@@ -110,11 +110,13 @@ export class Arrow {
     beneficiary,
     mintKP = Keypair.generate(),
     payer = this.provider.wallet.publicKey,
+    sunnyRewarderKey = SUNNY_REWARDER_KEY,
   }: {
     sunnyPool: PublicKey;
     beneficiary: PublicKey;
     mintKP?: Keypair;
     payer?: PublicKey;
+    sunnyRewarderKey?: PublicKey;
   }): Promise<{
     initTX: TransactionEnvelope;
     newArrowTX: TransactionEnvelope;
@@ -134,7 +136,7 @@ export class Arrow {
       owner: arrow,
     });
     const [internalQuarry] = await findQuarryAddress(
-      SUNNY_REWARDER_KEY,
+      sunnyRewarderKey,
       pool.internalMint
     );
     const [internalMiner, internalBump] = await findMinerAddress(
@@ -170,11 +172,11 @@ export class Arrow {
     });
 
     const rewarderDataRaw = await this.provider.getAccountInfo(
-      SUNNY_REWARDER_KEY
+      sunnyRewarderKey
     );
     if (!rewarderDataRaw) {
       throw new Error(
-        `could not fetch sunny rewarder at ${SUNNY_REWARDER_KEY.toString()}`
+        `could not fetch sunny rewarder at ${sunnyRewarderKey.toString()}`
       );
     }
     const rewarderData = parseRewarder(rewarderDataRaw);
