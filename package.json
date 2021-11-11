@@ -37,7 +37,7 @@
     "eslint-import-resolver-node": "^0.3.6",
     "eslint-plugin-import": "^2.25.2",
     "husky": "^7.0.4",
-    "jsbi": "^3.2.5",
+    "jsbi": "^4.1.0",
     "lerna": "^4.0.0",
     "lint-staged": "^11.2.6",
     "mocha": "^9.1.3",
