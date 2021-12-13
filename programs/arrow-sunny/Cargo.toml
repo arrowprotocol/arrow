@@ -1,6 +1,6 @@
 [package]
 name = "arrow-sunny"
-version = "0.1.2"
+version = "0.1.5"
 description = "Sunny protocol integration for Arrow."
 edition = "2018"
 homepage = "https://arrowprotocol.com"
