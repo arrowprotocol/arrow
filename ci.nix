@@ -1,9 +1,12 @@
-{ pkgs }:
+{ pkgs, saber-pkgs }:
+
+with saber-pkgs;
+
 pkgs.buildEnv {
   name = "ci";
   paths = with pkgs;
     (pkgs.lib.optionals pkgs.stdenv.isLinux [ libudev ]) ++ [
-      anchor-0_18_0
+      anchor-0_19_0
 
       nodejs
       yarn

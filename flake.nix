@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     saber-overlay.url = "github:saber-hq/saber-overlay";
-    saber-overlay.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -15,12 +14,13 @@
       "x86_64-darwin"
     ] (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ saber-overlay.overlay ];
+        pkgs = import nixpkgs { inherit system; };
+        saber-pkgs = saber-overlay.packages.${system};
+      in rec {
+        packages.ci = import ./ci.nix { inherit pkgs saber-pkgs; };
+        devShell = import ./shell.nix {
+          inherit pkgs;
+          ci = packages.ci;
         };
-      in {
-        devShell = import ./shell.nix { inherit pkgs; };
-        packages.ci = import ./ci.nix { inherit pkgs; };
       });
 }
