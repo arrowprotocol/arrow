@@ -38,19 +38,23 @@ jobs:
         uses: actions/setup-node@v2
         with:
           always-auth: true
-          node-version: "16"
       - name: Yarn Cache
         uses: actions/cache@v2
         with:
-          path: ./.yarn
-          key: ${{ runner.os }}-${{ hashFiles('./.yarn/**/*.js') }}
+          path: |
+            ./.yarn/cache
+            ./.yarn/unplugged
+            ./.yarn/install-state.gz
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
       - name: Install Yarn dependencies
         run: yarn install
       - run: ./scripts/generate-idl-types.sh
       - run: yarn build
       - run: yarn typecheck
       - run: yarn lint
-      - run: yarn dlx @yarnpkg/doctor
+      - run: yarn doctor
 
   integration-tests:
     runs-on: ubuntu-latest
@@ -104,8 +108,13 @@ jobs:
       - name: Yarn Cache
         uses: actions/cache@v2
         with:
-          path: ./.yarn
-          key: ${{ runner.os }}-${{ hashFiles('./.yarn/**/*.js') }}
+          path: |
+            ./.yarn/cache
+            ./.yarn/unplugged
+            ./.yarn/install-state.gz
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
