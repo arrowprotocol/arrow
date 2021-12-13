@@ -6,6 +6,7 @@ pkgs.buildEnv {
   name = "ci";
   paths = with pkgs;
     (pkgs.lib.optionals pkgs.stdenv.isLinux [ libudev ]) ++ [
+      cargo-workspaces
       anchor-0_19_0
 
       nodejs
