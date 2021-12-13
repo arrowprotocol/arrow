@@ -2,7 +2,7 @@
 
 use crate::*;
 use anchor_lang::prelude::*;
-use vipers::{assert_ata, assert_keys_eq, validate::Validate};
+use vipers::{assert_ata, assert_keys_eq, invariant, validate::Validate};
 
 impl<'info> InitArrowMiner<'info> {
     /// Initializes the internal miner.
@@ -124,7 +124,7 @@ impl<'info> Validate<'info> for InitArrowMiner<'info> {
 
 impl ArrowMiner {
     fn assert_not_initialized(&self) -> ProgramResult {
-        require!(
+        invariant!(
             *self == ArrowMiner::default(),
             InitArrowMinersAlreadyInitialized
         );

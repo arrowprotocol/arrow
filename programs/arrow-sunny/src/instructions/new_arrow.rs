@@ -2,7 +2,7 @@
 
 use crate::*;
 use anchor_lang::prelude::*;
-use vipers::{assert_keys_eq, validate::Validate};
+use vipers::{assert_keys_eq, invariant, validate::Validate};
 
 impl<'info> NewArrow<'info> {
     /// Initializes the vault.
@@ -57,11 +57,11 @@ impl<'info> NewArrow<'info> {
             *self.arrow,
             "arrow_mint.freeze_authority"
         );
-        require!(
+        invariant!(
             self.arrow_mint.decimals == self.vendor_mint.decimals,
             NewArrowDecimalMismatch
         );
-        require!(self.arrow_mint.supply == 0, NewArrowNonZeroSupply);
+        invariant!(self.arrow_mint.supply == 0, NewArrowNonZeroSupply);
 
         Ok(())
     }
