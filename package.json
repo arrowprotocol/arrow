@@ -43,7 +43,7 @@
     "prettier": "^2.5.1",
     "ts-node": "^10.4.0",
     "typedoc": "^0.22.10",
-    "typescript": "^4.5.3"
+    "typescript": "^4.5.4"
   },
   "scripts": {
     "build": "rm -fr dist/ && tsc -P tsconfig.build.json && tsc -P tsconfig.esm.json",
