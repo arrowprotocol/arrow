@@ -4,7 +4,7 @@ import type { ArrowSunnyIDL } from ".";
 
 export * from "../idls/arrow_sunny";
 
-type ArrowSunnyTypes = AnchorTypes<ArrowSunnyIDL, { arrow: ArrowData }>;
+export type ArrowSunnyTypes = AnchorTypes<ArrowSunnyIDL, { arrow: ArrowData }>;
 
 export type ArrowSunnyProgram = ArrowSunnyTypes["Program"];
 

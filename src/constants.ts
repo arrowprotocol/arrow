@@ -1,4 +1,8 @@
+import { buildCoderMap } from "@saberhq/anchor-contrib";
 import { PublicKey } from "@solana/web3.js";
+
+import { ArrowSunnyJSON } from "./idls/arrow_sunny";
+import type { ArrowSunnyTypes } from "./programs/arrowSunny";
 
 /**
  * Arrow program addresses.
@@ -33,4 +37,12 @@ export const SUNNY_REWARDER_KEY = new PublicKey(
  */
 export const SUNNY_CREATOR_KEY = new PublicKey(
   "7iAxSFR2dgHxcaASBjAkktgiwPDUYCZYmKz7QAektZ4B"
+);
+
+/**
+ * Coder for Arrows.
+ */
+export const ARROW_CODER = buildCoderMap<{ ArrowSunny: ArrowSunnyTypes }>(
+  { ArrowSunny: ArrowSunnyJSON },
+  ARROW_ADDRESSES
 );
