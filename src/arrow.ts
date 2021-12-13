@@ -300,7 +300,7 @@ export class Arrow {
     amount: TokenAmount;
     depositor?: PublicKey;
   }): Promise<TransactionEnvelope> {
-    const { depositorATAs, stakeAccounts } = await this.generateStakeAccounts({
+    const { depositorATAs, stakeAccounts } = await this._generateStakeAccounts({
       arrowMint,
       depositor,
     });
@@ -318,7 +318,7 @@ export class Arrow {
     ]);
   }
 
-  private async generateStakeAccounts({
+  private async _generateStakeAccounts({
     arrowMint,
     depositor = this.provider.wallet.publicKey,
   }: {
@@ -327,9 +327,7 @@ export class Arrow {
   }) {
     const [arrowKey] = await generateArrowAddress(arrowMint);
     const arrow: ArrowData | null =
-      (await this.programs.ArrowSunny.account.arrow.fetchNullable(
-        arrowKey
-      )) as ArrowData | null;
+      await this.programs.ArrowSunny.account.arrow.fetchNullable(arrowKey);
     if (!arrow) {
       throw new Error("arrow not found");
     }
@@ -393,7 +391,7 @@ export class Arrow {
     depositor?: PublicKey;
   }): Promise<TransactionEnvelope> {
     const { arrow, depositorATAs, stakeAccounts } =
-      await this.generateStakeAccounts({
+      await this._generateStakeAccounts({
         arrowMint,
         depositor,
       });
@@ -437,9 +435,7 @@ export class Arrow {
   }> {
     const [arrowKey] = await generateArrowAddress(arrowMint);
     const arrowData: ArrowData | null =
-      (await this.programs.ArrowSunny.account.arrow.fetchNullable(
-        arrowKey
-      )) as ArrowData | null;
+      await this.programs.ArrowSunny.account.arrow.fetchNullable(arrowKey);
     if (!arrowData) {
       throw new Error("arrow not found");
     }
@@ -448,11 +444,11 @@ export class Arrow {
       key: arrowKey,
       data: arrowData,
     };
-    const vendorTX = await this.claimRewarder({
+    const vendorTX = await this._claimRewarder({
       arrow,
       miner: arrow.data.vendorMiner,
     });
-    const internalTX = await this.claimRewarder({
+    const internalTX = await this._claimRewarder({
       arrow,
       miner: arrow.data.internalMiner,
     });
@@ -463,7 +459,7 @@ export class Arrow {
     };
   }
 
-  private async claimRewarder({
+  private async _claimRewarder({
     arrow,
     miner,
   }: {
