@@ -950,9 +950,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mint-wrapper"
-version = "1.11.0"
+version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41bcff618a4cb68e53e9b834e1a30996db8d6ddc3e95037893270f78d9ae384f"
+checksum = "06c4ac60a123e4faafa16961e92c3e3d193f925bae662a1ccf743206121fc513"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
