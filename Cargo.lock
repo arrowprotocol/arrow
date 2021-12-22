@@ -449,9 +449,9 @@ dependencies = [
 
 [[package]]
 name = "bytemuck"
-version = "1.7.2"
+version = "1.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72957246c41db82b8ef88a5486143830adeb8227ef9837740bdec67724cf2c5b"
+checksum = "439989e6b8c38d1b6570a384ef1e49c8848128f5a97f3914baef02920842712f"
 dependencies = [
  "bytemuck_derive",
 ]
@@ -836,9 +836,9 @@ dependencies = [
 
 [[package]]
 name = "num_enum"
-version = "0.5.4"
+version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f9bd055fb730c4f8f4f57d45d35cd6b3f0980535b056dc7ff119cee6a66ed6f"
+checksum = "085fe377a4b2805c0fbc09484415ec261174614b7f080b0e0d520456ac421a67"
 dependencies = [
  "derivative",
  "num_enum_derive",
@@ -846,9 +846,9 @@ dependencies = [
 
 [[package]]
 name = "num_enum_derive"
-version = "0.5.4"
+version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "486ea01961c4a818096de679a8b740b26d9033146ac5291b1c98557658f8cdd9"
+checksum = "5249369707a1e07b39f78d98c8f34e00aca7dcb053812fdbb5ad7be82c1bba38"
 dependencies = [
  "proc-macro-crate 1.1.0",
  "proc-macro2",
@@ -914,9 +914,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.33"
+version = "1.0.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb37d2df5df740e582f28f8560cf425f52bb267d872fe58358eadb554909f07a"
+checksum = "2f84e92c0f7c9d58328b85a78557813e4bd845130db68d7184635344399423b1"
 dependencies = [
  "unicode-xid",
 ]
@@ -936,9 +936,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mine"
-version = "1.11.0"
+version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2d14d7918e8d8f11fa1e9ce491a0384bae24f93a4959debc012f56f67e870e2"
+checksum = "7855a3cf4e0d8218f78109cffe8d4542433594c8a63efdfb03b64960e89cd92d"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -950,9 +950,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mint-wrapper"
-version = "1.11.0"
+version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41bcff618a4cb68e53e9b834e1a30996db8d6ddc3e95037893270f78d9ae384f"
+checksum = "06c4ac60a123e4faafa16961e92c3e3d193f925bae662a1ccf743206121fc513"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -1076,9 +1076,9 @@ checksum = "568a8e6258aa33c13358f81fd834adb854c6f7c9468520910a9b1e8fac068012"
 
 [[package]]
 name = "serde"
-version = "1.0.131"
+version = "1.0.132"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4ad69dfbd3e45369132cc64e6748c2d65cdfb001a2b1c232d128b4ad60561c1"
+checksum = "8b9875c23cf305cd1fd7eb77234cbb705f21ea6a72c637a5c6db5fe4b8e7f008"
 dependencies = [
  "serde_derive",
 ]
@@ -1094,9 +1094,9 @@ dependencies = [
 
 [[package]]
 name = "serde_derive"
-version = "1.0.131"
+version = "1.0.132"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b710a83c4e0dff6a3d511946b95274ad9ca9e5d3ae497b63fda866ac955358d2"
+checksum = "ecc0db5cb2556c0e558887d9bbdcf6ac4471e83ff66cf696e5419024d1606276"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1147,9 +1147,9 @@ checksum = "1ecab6c735a6bb4139c0caafd0cc3635748bbb3acf4550e8138122099251f309"
 
 [[package]]
 name = "solana-frozen-abi"
-version = "1.9.0"
+version = "1.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c4c871275d36ee9b473a753614a4bcfbda4d713672a67f3fa501fff19f243c18"
+checksum = "4fd67f1408118e24d056251c5ae2cc11512ebcf1337500c0df886b6e95176404"
 dependencies = [
  "bs58 0.4.0",
  "bv",
@@ -1167,9 +1167,9 @@ dependencies = [
 
 [[package]]
 name = "solana-frozen-abi-macro"
-version = "1.9.0"
+version = "1.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c7d3ba4f7f0830179ebcdbf837f74ab6922f36ad300905c4c875b781109edac"
+checksum = "b5e91b2f34d96a4cb05e780bfc59ed0f411c2de035ce4f00bef04b1bd314a423"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1179,9 +1179,9 @@ dependencies = [
 
 [[package]]
 name = "solana-logger"
-version = "1.9.0"
+version = "1.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "053b07f550226b3be14f85c40e1760a8dd7405a125e19dcba453966f73cbfb6a"
+checksum = "a6f2dbc47d8a5104f5e0d0b78398603c979da1c8f668f72184257a3afc912516"
 dependencies = [
  "env_logger",
  "lazy_static",
@@ -1190,9 +1190,9 @@ dependencies = [
 
 [[package]]
 name = "solana-program"
-version = "1.9.0"
+version = "1.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93f5e4a9d4aaeb454148aebc6669a39460609ef007c63a0f798c3435ba2f2bc9"
+checksum = "892c969af68555ebf498beb550da817b08e836d5ba58ce09df18f146317bd142"
 dependencies = [
  "base64 0.13.0",
  "bincode",
@@ -1233,9 +1233,9 @@ dependencies = [
 
 [[package]]
 name = "solana-sdk-macro"
-version = "1.9.0"
+version = "1.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0716038693fd2d4a6fb14553c50cba120d9bcf278dbeb1cece9ab279b8ded6bf"
+checksum = "bf60865744bbde0602df80f21c10c4c177a4b735e7c1d366914b9b7a585ed844"
 dependencies = [
  "bs58 0.4.0",
  "proc-macro2",
