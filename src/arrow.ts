@@ -62,10 +62,7 @@ export const parseRewarder = (info: KeyedAccountInfo): RewarderData =>
  * Javascript SDK for interacting with Arrow.
  */
 export class Arrow {
-  constructor(
-    public readonly provider: Provider,
-    public readonly programs: ArrowPrograms
-  ) {}
+  constructor(readonly provider: Provider, readonly programs: ArrowPrograms) {}
 
   /**
    * Initialize from a Provider
@@ -90,7 +87,7 @@ export class Arrow {
   /**
    * Creates a new instance of the SDK with the given keypair.
    */
-  public withSigner(signer: Signer): Arrow {
+  withSigner(signer: Signer): Arrow {
     return Arrow.init(
       new SolanaProvider(
         this.provider.connection,
