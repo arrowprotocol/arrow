@@ -24,9 +24,7 @@ anchor-lang = ">=0.17.0"
 anchor-spl = ">=0.17.0"
 quarry-mine = { version = "1.10.0", features = ["cpi"] }
 quarry-mint-wrapper = { version = "1.10.0", features = ["cpi"] }
-sunny-anchor = { version = "0.1.0", path = "../../lib/sunny", features = [
-    "cpi"
-] }
+sunny-anchor = { version = "0.1.0", path = "./lib/sunny", features = ["cpi"] }
 num-traits = "0.2"
 vipers = "1.5.3"
 spl-associated-token-account = { version = "1.0.3", features = [
