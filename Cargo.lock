@@ -191,9 +191,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.51"
+version = "1.0.52"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b26702f315f53b6071259e15dd9d64528213b44d61de1ec926eca7715d62203"
+checksum = "84450d0b4a8bd1ba4144ce8ce718fbc5d071358b1e5384bace6536b3d1f2d5b3"
 
 [[package]]
 name = "arrayref"
@@ -936,9 +936,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mine"
-version = "1.11.1"
+version = "1.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7855a3cf4e0d8218f78109cffe8d4542433594c8a63efdfb03b64960e89cd92d"
+checksum = "45a67c003c3e1f38fdf0dd328ad5094427ebafd5c97d208c039765d21fabd6e4"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -950,9 +950,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mint-wrapper"
-version = "1.11.1"
+version = "1.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06c4ac60a123e4faafa16961e92c3e3d193f925bae662a1ccf743206121fc513"
+checksum = "d282c019033a37d5f7b6ec4dc8e4873f9de54d639d41aa5104aa58b82f6164e1"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -1305,9 +1305,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.82"
+version = "1.0.83"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8daf5dd0bb60cbd4137b1b587d2fc0ae729bc07cf01cd70b36a1ed5ade3b9d59"
+checksum = "23a1dfb999630e338648c83e91c59a4e9fb7620f520c3194b6b89e276f2f1959"
 dependencies = [
  "proc-macro2",
  "quote",
