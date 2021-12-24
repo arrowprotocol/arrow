@@ -89,11 +89,10 @@ impl<'info> Validate<'info> for DepositVendor<'info> {
         assert_keys_eq!(self.pool, self.arrow.pool, "pool");
         assert_keys_eq!(self.vault, self.arrow.vault, "vault");
 
-        assert_ata!(
-            self.vault_vendor_token_account.key(),
-            self.vault.key(),
-            self.arrow.vendor_miner.mint,
-            "vault_vendor_token_account"
+        assert_keys_eq!(self.vault_vendor_token_account.owner, self.vault);
+        assert_keys_eq!(
+            self.vault_vendor_token_account.mint,
+            self.arrow.vendor_miner.mint
         );
 
         Ok(())

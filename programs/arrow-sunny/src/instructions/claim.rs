@@ -40,11 +40,8 @@ impl<'info> Validate<'info> for Claim<'info> {
         let rewards_mint = self.rewards_token_mint.key();
 
         // rewards token accounts
-        assert_ata!(
-            self.vault_rewards_token_account.key(),
-            self.vault,
-            rewards_mint
-        );
+        assert_keys_eq!(self.vault_rewards_token_account.owner, self.vault);
+        assert_keys_eq!(self.vault_rewards_token_account.mint, rewards_mint);
 
         // mine
         // figure out which miner we are

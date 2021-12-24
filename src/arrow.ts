@@ -1,8 +1,4 @@
-import {
-  Coder,
-  Program,
-  Provider as AnchorProvider,
-} from "@project-serum/anchor";
+import { Coder } from "@project-serum/anchor";
 import type { RewarderData } from "@quarryprotocol/quarry-sdk";
 import {
   findMinerAddress,
@@ -11,9 +7,11 @@ import {
   QUARRY_ADDRESSES,
   QUARRY_IDLS,
 } from "@quarryprotocol/quarry-sdk";
-import type { Provider } from "@saberhq/solana-contrib";
+import { newProgramMap } from "@saberhq/anchor-contrib";
+import type { AugmentedProvider, Provider } from "@saberhq/solana-contrib";
 import {
   SignerWallet,
+  SolanaAugmentedProvider,
   SolanaProvider,
   TransactionEnvelope,
 } from "@saberhq/solana-contrib";
@@ -34,8 +32,8 @@ import type {
 } from "@solana/web3.js";
 import { Keypair, SystemProgram, SYSVAR_CLOCK_PUBKEY } from "@solana/web3.js";
 
-import { ARROW_FEE_OWNER, SUNNY_REWARDER_KEY } from ".";
-import { ARROW_ADDRESSES, SUNNY_PROGRAM } from "./constants";
+import { ARROW_ADDRESSES, ARROW_FEE_OWNER, SUNNY_REWARDER_KEY } from ".";
+import { SUNNY_PROGRAM } from "./constants";
 import { generateArrowAddress, generateSunnyVaultAddress } from "./pda";
 import type {
   ArrowData,
@@ -62,7 +60,10 @@ export const parseRewarder = (info: KeyedAccountInfo): RewarderData =>
  * Javascript SDK for interacting with Arrow.
  */
 export class Arrow {
-  constructor(readonly provider: Provider, readonly programs: ArrowPrograms) {}
+  constructor(
+    readonly provider: AugmentedProvider,
+    readonly programs: ArrowPrograms
+  ) {}
 
   /**
    * Initialize from a Provider
@@ -70,18 +71,15 @@ export class Arrow {
    * @returns
    */
   static init(provider: Provider): Arrow {
-    const anchorProvider = new AnchorProvider(
-      provider.connection,
-      provider.wallet,
-      provider.opts
+    const augProvider = new SolanaAugmentedProvider(provider);
+    return new Arrow(
+      augProvider,
+      newProgramMap<ArrowPrograms>(
+        augProvider,
+        { ArrowSunny: ArrowSunnyJSON },
+        ARROW_ADDRESSES
+      )
     );
-    return new Arrow(provider, {
-      ArrowSunny: new Program(
-        ArrowSunnyJSON,
-        ARROW_ADDRESSES.ArrowSunny,
-        anchorProvider
-      ) as unknown as ArrowSunnyProgram,
-    });
   }
 
   /**
@@ -117,6 +115,7 @@ export class Arrow {
   }): Promise<{
     initTX: TransactionEnvelope;
     newArrowTX: TransactionEnvelope;
+    newArrowTXs: TransactionEnvelope[];
   }> {
     const poolRaw = await this.provider.connection.getAccountInfo(sunnyPool);
     if (!poolRaw) {
@@ -271,11 +270,16 @@ export class Arrow {
           ),
         ])
       ),
-      newArrowTX: new TransactionEnvelope(this.provider, [
+      newArrowTX: this.provider.newTX([
         newArrowIX,
         initVendorMinerIX,
         initInternalMinerIX,
       ]),
+      newArrowTXs: [
+        this.provider.newTX([newArrowIX]),
+        this.provider.newTX([initVendorMinerIX]),
+        this.provider.newTX([initInternalMinerIX]),
+      ],
     };
   }
 
@@ -304,7 +308,7 @@ export class Arrow {
     if (depositorATAs.createAccountInstructions.vendor) {
       throw new Error("no vendor tokens");
     }
-    return new TransactionEnvelope(this.provider, [
+    return this.provider.newTX([
       ...depositorATAs.instructions,
       this.programs.ArrowSunny.instruction.depositVendor(amount.toU64(), {
         accounts: stakeAccounts,
@@ -400,10 +404,8 @@ export class Arrow {
       mint: arrow.vendorMiner.mint,
       owner: arrow.pool,
     });
-    return new TransactionEnvelope(this.provider, [
-      ...(sunnyFeeDestination.instruction
-        ? [sunnyFeeDestination.instruction]
-        : []),
+    return this.provider.newTX([
+      sunnyFeeDestination.instruction,
       ...depositorATAs.instructions,
       this.programs.ArrowSunny.instruction.unstakeInternal(amount.toU64(), {
         accounts: {
