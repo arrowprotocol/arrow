@@ -8,7 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  SOLANA_VERSION: "1.8.9"
+  SOLANA_VERSION: "1.8.11"
   RUST_TOOLCHAIN: nightly-2021-12-12
   CACHIX_CACHE: arrowprotocol
 
@@ -36,18 +36,18 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v2
-        with:
-          always-auth: true
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
       - name: Yarn Cache
         uses: actions/cache@v2
         with:
-          path: |
-            ./.yarn/cache
-            ./.yarn/unplugged
-            ./.yarn/install-state.gz
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-modules-
+            ${{ runner.os }}-yarn-
+
       - name: Install Yarn dependencies
         run: yarn install
       - run: ./scripts/generate-idl-types.sh
@@ -76,13 +76,19 @@ jobs:
 
       # Install Solana
       - name: Cache Solana binaries
+        id: solana-cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache/solana
+          path: |
+            ~/.cache/solana
+            ~/.local/share/solana/install
           key: ${{ runner.os }}-${{ env.SOLANA_VERSION }}
       - name: Install Solana
+        if: steps.solana-cache.outputs.cache-hit != 'true'
         run: |
-          sh -c "$(curl -sSfL https://release.solana.com/v${{ env.SOLANA_VERSION }}/install)"
+          nix shell .#ci --command solana-install init ${{ env.SOLANA_VERSION }}
+      - name: Setup Solana Path
+        run: |
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           solana --version
@@ -103,23 +109,23 @@ jobs:
       - name: Build program
         run: nix shell .#ci --command anchor build
 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
       - name: Yarn Cache
         uses: actions/cache@v2
         with:
-          path: |
-            ./.yarn/cache
-            ./.yarn/unplugged
-            ./.yarn/install-state.gz
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-modules-
+            ${{ runner.os }}-yarn-
+
       - name: Setup Node
         uses: actions/setup-node@v2
-        with:
-          node-version: "16"
       - run: yarn install
       - name: Generate IDL types
         run: nix shell .#ci --command yarn idl:generate:nolint
       - run: yarn build
+      - run: ./scripts/download-programs.sh
       - name: Run e2e tests
         run: nix shell .#ci --command yarn test:e2e
