@@ -188,6 +188,8 @@ pub struct InitMiner<'info> {
     #[account(mut)]
     pub miner: UncheckedAccount<'info>,
     /// Account holding the miner's tokens
+    /// This should be an ATA of the miner, otherwise
+    /// Sunny will throw an exception.
     pub miner_vault: Box<Account<'info, TokenAccount>>,
     /// Mint of the token
     pub token_mint: Box<Account<'info, Mint>>,

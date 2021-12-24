@@ -92,7 +92,7 @@ impl<'info> InitArrowMiner<'info> {
             self.pool.rewards_mint,
             self.miner.rewarder.rewards_token_mint,
         );
-        assert_keys_eq!(self.pool.vendor_mint, self.miner.quarry.token_mint_key,);
+        assert_keys_eq!(self.pool.vendor_mint, self.miner.quarry.token_mint_key);
 
         Ok(())
     }
@@ -101,7 +101,7 @@ impl<'info> InitArrowMiner<'info> {
         self.arrow.internal_miner.assert_not_initialized()?;
 
         // validate Pool fields
-        assert_keys_eq!(self.pool.internal_mint, self.miner.quarry.token_mint_key,);
+        assert_keys_eq!(self.pool.internal_mint, self.miner.quarry.token_mint_key);
 
         Ok(())
     }
@@ -113,8 +113,8 @@ impl<'info> Validate<'info> for InitArrowMiner<'info> {
         self.arrow.internal_miner.assert_not_initialized()?;
 
         // ensure we are using the Arrow's pool and vault
-        assert_keys_eq!(self.arrow.pool, *self.pool);
-        assert_keys_eq!(self.arrow.vault, *self.vault);
+        assert_keys_eq!(self.arrow.pool, self.pool);
+        assert_keys_eq!(self.arrow.vault, self.vault);
 
         // validate consistency of miner struct
         self.miner.validate()?;
