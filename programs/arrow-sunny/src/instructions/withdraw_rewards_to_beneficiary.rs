@@ -87,12 +87,12 @@ impl<'info> Validate<'info> for WithdrawRewardsToBeneficiary<'info> {
         assert_keys_eq!(self.arrow_staging_account.mint, rewards_mint);
 
         assert_keys_eq!(
-            *self.vault_rewards_token_account,
+            self.vault_rewards_token_account,
             miner.vault_rewards_token_account
         );
 
-        assert_keys_eq!(self.arrow.pool, *self.pool, "pool");
-        assert_keys_eq!(self.arrow.vault, *self.vault, "vault");
+        assert_keys_eq!(self.arrow.pool, self.pool);
+        assert_keys_eq!(self.arrow.vault, self.vault);
 
         Ok(())
     }

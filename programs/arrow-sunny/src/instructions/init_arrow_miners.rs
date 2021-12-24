@@ -86,8 +86,8 @@ impl<'info> InitArrowMiner<'info> {
     fn validate_init_vendor(&self) -> ProgramResult {
         self.arrow.vendor_miner.assert_not_initialized()?;
 
-        assert_keys_eq!(self.pool.quarry, *self.miner.quarry);
-        assert_keys_eq!(self.pool.rewarder, *self.miner.rewarder);
+        assert_keys_eq!(self.pool.quarry, self.miner.quarry);
+        assert_keys_eq!(self.pool.rewarder, self.miner.rewarder);
         assert_keys_eq!(
             self.pool.rewards_mint,
             self.miner.rewarder.rewards_token_mint,

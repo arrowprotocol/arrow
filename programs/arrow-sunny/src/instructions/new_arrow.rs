@@ -73,7 +73,7 @@ impl<'info> Validate<'info> for NewArrow<'info> {
         // ensure that the provided vendor mint
         // corresponds to the pool.
         // This is used for validating the arrow mint.
-        assert_keys_eq!(self.pool.vendor_mint, *self.vendor_mint, "pool.vendor_mint");
+        assert_keys_eq!(self.pool.vendor_mint, self.vendor_mint);
         Ok(())
     }
 }

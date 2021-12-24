@@ -56,8 +56,8 @@ impl<'info> Validate<'info> for Claim<'info> {
         assert_keys_eq!(self.mint_wrapper, miner.mint_wrapper);
         assert_keys_eq!(self.minter.mint_wrapper, self.mint_wrapper);
 
-        assert_keys_eq!(self.arrow.pool, *self.pool, "pool");
-        assert_keys_eq!(self.arrow.vault, *self.vault, "vault");
+        assert_keys_eq!(self.arrow.pool, self.pool);
+        assert_keys_eq!(self.arrow.vault, self.vault);
 
         Ok(())
     }
