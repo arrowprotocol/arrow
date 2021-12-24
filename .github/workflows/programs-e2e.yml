@@ -9,7 +9,7 @@ on:
 env:
   CARGO_TERM_COLOR: always
   SOLANA_VERSION: "1.8.11"
-  RUST_TOOLCHAIN: nightly-2021-12-12
+  RUST_TOOLCHAIN: nightly-2021-12-23
   CACHIX_CACHE: arrowprotocol
 
 jobs:

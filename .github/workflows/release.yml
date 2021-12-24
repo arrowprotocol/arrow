@@ -8,7 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUST_TOOLCHAIN: nightly-2021-12-12
+  RUST_TOOLCHAIN: nightly-2021-12-23
   NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
   CACHIX_CACHE: arrowprotocol
 
