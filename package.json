@@ -17,7 +17,7 @@
   "license": "AGPL-3.0",
   "devDependencies": {
     "@project-serum/anchor": "^0.19.1-beta.1",
-    "@quarryprotocol/quarry-sdk": "^1.11.2",
+    "@quarryprotocol/quarry-sdk": "^1.11.3",
     "@rushstack/eslint-patch": "^1.1.0",
     "@saberhq/anchor-contrib": "^1.11.3",
     "@saberhq/chai-solana": "^1.11.3",
@@ -27,7 +27,7 @@
     "@solana/web3.js": "^1.31.0",
     "@types/bn.js": "^5.1.0",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.11.15",
+    "@types/node": "^16.11.17",
     "@types/prettier": "^2.4.2",
     "@yarnpkg/doctor": "^3.1.0",
     "bn.js": "^5.2.0",
@@ -59,9 +59,9 @@
   "peerDependencies": {
     "@project-serum/anchor": "^0.19.0",
     "@quarryprotocol/quarry-sdk": "^1.11.0",
-    "@saberhq/anchor-contrib": "^1.10.16",
-    "@saberhq/solana-contrib": "^1.10.16",
-    "@saberhq/token-utils": "^1.10.16",
+    "@saberhq/anchor-contrib": "^1.11",
+    "@saberhq/solana-contrib": "^1.11",
+    "@saberhq/token-utils": "^1.11",
     "@solana/web3.js": "^1.29.2",
     "bn.js": "*"
   },
