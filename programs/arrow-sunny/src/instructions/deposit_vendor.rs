@@ -71,28 +71,27 @@ impl<'info> DepositVendor<'info> {
 
 impl<'info> Validate<'info> for DepositVendor<'info> {
     fn validate(&self) -> ProgramResult {
-        assert_keys_eq!(*self.arrow_stake.arrow_mint, self.arrow.mint, "arrow_mint");
+        assert_keys_eq!(self.arrow_stake.arrow_mint, self.arrow.mint);
 
         // depositor
         assert_keys_eq!(
             self.depositor_staked_tokens.owner,
-            *self.arrow_stake.depositor,
-            "depositor_staked_tokens.owner"
+            self.arrow_stake.depositor
         );
         assert_keys_eq!(
             self.depositor_staked_tokens.mint,
-            self.arrow.vendor_miner.mint,
-            "depositor_staked_tokens.mint"
+            self.arrow.vendor_miner.mint
         );
         self.arrow_stake.validate()?;
 
         // stake
         self.vendor_stake.validate_miner(&self.arrow.vendor_miner)?;
-        assert_keys_eq!(*self.pool, self.arrow.pool, "pool");
-        assert_keys_eq!(*self.vault, self.arrow.vault, "vault");
+        assert_keys_eq!(self.pool, self.arrow.pool, "pool");
+        assert_keys_eq!(self.vault, self.arrow.vault, "vault");
+
         assert_ata!(
-            *self.vault_vendor_token_account,
-            *self.vault,
+            self.vault_vendor_token_account.key(),
+            self.vault.key(),
             self.arrow.vendor_miner.mint,
             "vault_vendor_token_account"
         );

@@ -1,15 +1,12 @@
 //! Addresses.
 
 use anchor_lang::prelude::*;
+use anchor_lang::solana_program;
 
 /// The owner of all fee token accounts.
-pub mod fee_owner {
-    use anchor_lang::declare_id;
-    declare_id!("5ZhyZ5846xWtgm68k9Dg2WpechzcxVPxL3yD3zL3H1wm");
-}
+pub static ARROW_FEE_OWNER: Pubkey =
+    static_pubkey::static_pubkey!("5ZhyZ5846xWtgm68k9Dg2WpechzcxVPxL3yD3zL3H1wm");
 
-/// Owner of arrow fees
-pub static ARROW_FEE_OWNER: Pubkey = fee_owner::ID;
 /// Bump seed of arrow fees
 pub static ARROW_FEE_OWNER_BUMP: u8 = 255;
 

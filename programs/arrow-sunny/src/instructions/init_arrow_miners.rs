@@ -2,7 +2,7 @@
 
 use crate::*;
 use anchor_lang::prelude::*;
-use vipers::{assert_ata, assert_keys_eq, invariant, validate::Validate};
+use vipers::{assert_keys_eq, invariant, validate::Validate};
 
 impl<'info> InitArrowMiner<'info> {
     /// Initializes the internal miner.
@@ -134,22 +134,14 @@ impl ArrowMiner {
 
 impl<'info> Validate<'info> for InitMiner<'info> {
     fn validate(&self) -> ProgramResult {
-        assert_keys_eq!(
-            self.quarry.rewarder_key,
-            *self.rewarder,
-            "vendor_miner.quarry.rewarder_key"
-        );
-        assert_ata!(
-            *self.miner_vault,
-            *self.miner,
-            *self.token_mint,
-            "miner_vault"
-        );
-        assert_keys_eq!(
-            self.quarry.token_mint_key,
-            *self.token_mint,
-            "quarry.token_mint_key"
-        );
+        assert_keys_eq!(self.quarry.rewarder_key, self.rewarder);
+
+        // this should be an ATA
+        // If it is not an ATA, the Sunny program will throw an exception.
+        assert_keys_eq!(self.miner_vault.owner, self.miner);
+        assert_keys_eq!(self.miner_vault.mint, self.token_mint);
+
+        assert_keys_eq!(self.quarry.token_mint_key, self.token_mint);
         Ok(())
     }
 }

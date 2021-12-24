@@ -217,6 +217,7 @@ dependencies = [
  "quarry-mine",
  "quarry-mint-wrapper",
  "spl-associated-token-account",
+ "static-pubkey",
  "sunny-anchor",
  "vipers",
 ]
@@ -1281,6 +1282,18 @@ dependencies = [
  "num_enum",
  "solana-program",
  "thiserror",
+]
+
+[[package]]
+name = "static-pubkey"
+version = "1.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e390e1e75910fd6c02265a4743f06c85775bb357c70f58384e867b3dc84a8011"
+dependencies = [
+ "bs58 0.4.0",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

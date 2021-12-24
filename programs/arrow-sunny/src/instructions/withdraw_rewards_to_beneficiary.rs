@@ -74,30 +74,18 @@ impl<'info> Validate<'info> for WithdrawRewardsToBeneficiary<'info> {
         let miner = self.arrow.miner_for_rewards(rewards_mint)?;
 
         // rewards token accounts
-        assert_ata!(
-            *self.beneficiary_account,
-            self.arrow.beneficiary,
-            rewards_mint,
-            "beneficiary_account"
-        );
-        assert_ata!(
-            *self.arrow_fee_account,
-            addresses::ARROW_FEE_OWNER,
-            rewards_mint,
-            "arrow_fee_account"
-        );
-        assert_ata!(
-            *self.sunny_pool_fee_account,
-            *self.pool,
-            rewards_mint,
-            "pool_fee_account"
-        );
-        assert_ata!(
-            *self.arrow_staging_account,
-            *self.arrow,
-            rewards_mint,
-            "arrow_staging_account"
-        );
+        assert_keys_eq!(self.beneficiary_account.owner, self.arrow.beneficiary);
+        assert_keys_eq!(self.beneficiary_account.mint, rewards_mint);
+
+        assert_keys_eq!(self.arrow_fee_account.owner, addresses::ARROW_FEE_OWNER);
+        assert_keys_eq!(self.arrow_fee_account.mint, rewards_mint);
+
+        assert_keys_eq!(self.sunny_pool_fee_account.owner, self.pool);
+        assert_keys_eq!(self.sunny_pool_fee_account.mint, rewards_mint);
+
+        assert_keys_eq!(self.arrow_staging_account.owner, self.arrow);
+        assert_keys_eq!(self.arrow_staging_account.mint, rewards_mint);
+
         assert_keys_eq!(
             *self.vault_rewards_token_account,
             miner.vault_rewards_token_account
