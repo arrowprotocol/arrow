@@ -1,6 +1,6 @@
-{ pkgs, saber-pkgs }:
+{ pkgs }:
 
-with saber-pkgs;
+with pkgs;
 
 pkgs.buildEnv {
   name = "ci";

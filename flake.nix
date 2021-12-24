@@ -14,10 +14,10 @@
       "x86_64-darwin"
     ] (system:
       let
-        pkgs = import nixpkgs { inherit system; };
-        saber-pkgs = saber-overlay.packages.${system};
+        pkgs = import nixpkgs { inherit system; }
+          // saber-overlay.packages.${system};
       in rec {
-        packages.ci = import ./ci.nix { inherit pkgs saber-pkgs; };
+        packages.ci = import ./ci.nix { inherit pkgs; };
         devShell = import ./shell.nix {
           inherit pkgs;
           ci = packages.ci;

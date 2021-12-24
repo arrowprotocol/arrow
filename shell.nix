@@ -5,5 +5,5 @@ pkgs.mkShell {
     pkgs.darwin.apple_sdk.frameworks.IOKit
     pkgs.darwin.apple_sdk.frameworks.Foundation
   ]);
-  buildInputs = with pkgs; [ ci rustup cargo-deps gh ];
+  buildInputs = with pkgs; [ ci rustup cargo-deps gh solana-cli ];
 }
