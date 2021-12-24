@@ -19,7 +19,7 @@ __metadata:
   resolution: "@arrowprotocol/arrow@workspace:."
   dependencies:
     "@project-serum/anchor": ^0.19.1-beta.1
-    "@quarryprotocol/quarry-sdk": ^1.11.2
+    "@quarryprotocol/quarry-sdk": ^1.11.3
     "@rushstack/eslint-patch": ^1.1.0
     "@saberhq/anchor-contrib": ^1.11.3
     "@saberhq/chai-solana": ^1.11.3
@@ -29,7 +29,7 @@ __metadata:
     "@solana/web3.js": ^1.31.0
     "@types/bn.js": ^5.1.0
     "@types/mocha": ^9.0.0
-    "@types/node": ^16.11.15
+    "@types/node": ^16.11.17
     "@types/prettier": ^2.4.2
     "@yarnpkg/doctor": ^3.1.0
     bn.js: ^5.2.0
@@ -52,9 +52,9 @@ __metadata:
   peerDependencies:
     "@project-serum/anchor": ^0.19.0
     "@quarryprotocol/quarry-sdk": ^1.11.0
-    "@saberhq/anchor-contrib": ^1.10.16
-    "@saberhq/solana-contrib": ^1.10.16
-    "@saberhq/token-utils": ^1.10.16
+    "@saberhq/anchor-contrib": ^1.11
+    "@saberhq/solana-contrib": ^1.11
+    "@saberhq/token-utils": ^1.11
     "@solana/web3.js": ^1.29.2
     bn.js: "*"
   languageName: unknown
@@ -1282,22 +1282,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@quarryprotocol/quarry-sdk@npm:^1.11.2":
-  version: 1.11.2
-  resolution: "@quarryprotocol/quarry-sdk@npm:1.11.2"
+"@quarryprotocol/quarry-sdk@npm:^1.11.3":
+  version: 1.11.3
+  resolution: "@quarryprotocol/quarry-sdk@npm:1.11.3"
   dependencies:
-    lodash.mapvalues: ^4.6.0
     tiny-invariant: ^1.2.0
     tslib: ^2.3.1
   peerDependencies:
     "@project-serum/anchor": ">=0.19"
-    "@saberhq/anchor-contrib": ^1.10
-    "@saberhq/solana-contrib": ^1.10
-    "@saberhq/token-utils": ^1.10
+    "@saberhq/anchor-contrib": ^1.11
+    "@saberhq/solana-contrib": ^1.11
+    "@saberhq/token-utils": ^1.11
     "@solana/web3.js": ^1
     bn.js: ^5.2.0
     jsbi: ^3 || ^4
-  checksum: 7ec50aa76f51a6752a4ede63a174c8162e930ca1c3271ef75fc7b14e082ae7e13ca77c73a0e5f65c6c340077a7dc1caf8f822020a4484bcd89adb604ba15949a
+  checksum: da1f42258cb67f1d3ed63562c58d999faccd246e95eda3edbd8965166c820231086fe71017c79fdf93548384f046fcdc2f81957849223c37518eed5604d7ed80
   languageName: node
   linkType: hard
 
@@ -1692,10 +1691,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.11.15":
-  version: 16.11.15
-  resolution: "@types/node@npm:16.11.15"
-  checksum: 30969f1c43d85ee645f1ff28640d25b8b7748bbd3cb31aeebc2799fa9f7aa580782430309496c82983a92009afe52e46b50b9b996cea697f62e93f27eb8f5eb5
+"@types/node@npm:^16.11.17":
+  version: 16.11.17
+  resolution: "@types/node@npm:16.11.17"
+  checksum: 86ed84f79450f6aba1a6ef09f8407c10076966c3cc7cc4eb3d35b8ae4f47817e525641396ef0a667fa0a88fcdf484f6182812c074601403083bdf3b5e1ac0313
   languageName: node
   linkType: hard
 

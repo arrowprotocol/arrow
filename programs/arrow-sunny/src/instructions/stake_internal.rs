@@ -38,14 +38,14 @@ impl<'info> StakeInternal<'info> {
 
 impl<'info> Validate<'info> for StakeInternal<'info> {
     fn validate(&self) -> ProgramResult {
-        assert_keys_eq!(self.arrow.internal_miner.mint, *self.internal_mint);
+        assert_keys_eq!(self.arrow.internal_miner.mint, self.internal_mint);
         assert_keys_eq!(
             self.arrow.internal_miner.vault_staked_token_account,
             *self.vault_internal_token_account
         );
 
-        assert_keys_eq!(self.arrow.pool, *self.pool);
-        assert_keys_eq!(self.arrow.vault, *self.vault);
+        assert_keys_eq!(self.arrow.pool, self.pool);
+        assert_keys_eq!(self.arrow.vault, self.vault);
         self.internal_stake
             .validate_miner(&self.arrow.internal_miner)?;
         Ok(())

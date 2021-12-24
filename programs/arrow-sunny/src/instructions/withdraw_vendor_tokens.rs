@@ -2,7 +2,7 @@
 
 use crate::{DepositVendor, WithdrawVendorTokens};
 use anchor_lang::prelude::*;
-use vipers::{assert_ata, validate::Validate};
+use vipers::{assert_keys_eq, validate::Validate};
 
 impl<'info> WithdrawVendorTokens<'info> {
     /// Withdraws vendor tokens
@@ -66,11 +66,10 @@ impl<'info> DepositVendor<'info> {
 impl<'info> Validate<'info> for WithdrawVendorTokens<'info> {
     fn validate(&self) -> ProgramResult {
         self.stake.validate()?;
-        assert_ata!(
-            self.sunny_pool_fee_destination,
-            self.stake.arrow.pool,
-            self.stake.arrow.vendor_miner.mint,
-            "sunny_pool_fee_destination"
+        assert_keys_eq!(self.sunny_pool_fee_destination.owner, self.stake.arrow.pool);
+        assert_keys_eq!(
+            self.sunny_pool_fee_destination.mint,
+            self.stake.arrow.vendor_miner.mint
         );
         Ok(())
     }

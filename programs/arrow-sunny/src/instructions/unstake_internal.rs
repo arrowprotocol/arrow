@@ -75,7 +75,7 @@ impl<'info> StakeInternal<'info> {
 
 impl<'info> Validate<'info> for UnstakeInternal<'info> {
     fn validate(&self) -> ProgramResult {
-        assert_keys_eq!(*self.arrow_stake.arrow_mint, self.stake.arrow.mint);
+        assert_keys_eq!(self.arrow_stake.arrow_mint, self.stake.arrow.mint);
         self.arrow_stake.validate()?;
         self.stake.validate()?;
         Ok(())
@@ -84,7 +84,7 @@ impl<'info> Validate<'info> for UnstakeInternal<'info> {
 
 impl<'info> Validate<'info> for ArrowStake<'info> {
     fn validate(&self) -> ProgramResult {
-        assert_keys_eq!(self.depositor_arrow_tokens.mint, *self.arrow_mint);
+        assert_keys_eq!(self.depositor_arrow_tokens.mint, self.arrow_mint);
         assert_keys_eq!(self.depositor_arrow_tokens.owner, self.depositor);
         Ok(())
     }

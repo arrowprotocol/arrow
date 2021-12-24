@@ -40,33 +40,21 @@ impl<'info> Validate<'info> for Claim<'info> {
         let rewards_mint = self.rewards_token_mint.key();
 
         // rewards token accounts
-        assert_ata!(
-            *self.vault_rewards_token_account,
-            *self.vault,
-            rewards_mint,
-            "rewards_token_account"
-        );
+        assert_keys_eq!(self.vault_rewards_token_account.owner, self.vault);
+        assert_keys_eq!(self.vault_rewards_token_account.mint, rewards_mint);
 
         // mine
         // figure out which miner we are
         let miner = self.arrow.miner_for_rewards(rewards_mint)?;
-        assert_keys_eq!(
-            *self.claim_fee_token_account,
-            miner.claim_fee_token_account,
-            "claim_fee_token_account"
-        );
+        assert_keys_eq!(self.claim_fee_token_account, miner.claim_fee_token_account);
         self.stake.validate_miner(miner)?;
 
         // mint wrapper
-        assert_keys_eq!(*self.mint_wrapper, miner.mint_wrapper, "mint_wrapper");
-        assert_keys_eq!(
-            self.minter.mint_wrapper,
-            *self.mint_wrapper,
-            "minter.mint_wrapper"
-        );
+        assert_keys_eq!(self.mint_wrapper, miner.mint_wrapper);
+        assert_keys_eq!(self.minter.mint_wrapper, self.mint_wrapper);
 
-        assert_keys_eq!(self.arrow.pool, *self.pool, "pool");
-        assert_keys_eq!(self.arrow.vault, *self.vault, "vault");
+        assert_keys_eq!(self.arrow.pool, self.pool);
+        assert_keys_eq!(self.arrow.vault, self.vault);
 
         Ok(())
     }

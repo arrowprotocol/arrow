@@ -2,7 +2,7 @@
 
 use crate::*;
 use anchor_lang::prelude::*;
-use vipers::{assert_ata, assert_keys_eq, invariant, validate::Validate};
+use vipers::{assert_keys_eq, invariant, validate::Validate};
 
 impl<'info> InitArrowMiner<'info> {
     /// Initializes the internal miner.
@@ -86,13 +86,13 @@ impl<'info> InitArrowMiner<'info> {
     fn validate_init_vendor(&self) -> ProgramResult {
         self.arrow.vendor_miner.assert_not_initialized()?;
 
-        assert_keys_eq!(self.pool.quarry, *self.miner.quarry);
-        assert_keys_eq!(self.pool.rewarder, *self.miner.rewarder);
+        assert_keys_eq!(self.pool.quarry, self.miner.quarry);
+        assert_keys_eq!(self.pool.rewarder, self.miner.rewarder);
         assert_keys_eq!(
             self.pool.rewards_mint,
             self.miner.rewarder.rewards_token_mint,
         );
-        assert_keys_eq!(self.pool.vendor_mint, self.miner.quarry.token_mint_key,);
+        assert_keys_eq!(self.pool.vendor_mint, self.miner.quarry.token_mint_key);
 
         Ok(())
     }
@@ -101,7 +101,7 @@ impl<'info> InitArrowMiner<'info> {
         self.arrow.internal_miner.assert_not_initialized()?;
 
         // validate Pool fields
-        assert_keys_eq!(self.pool.internal_mint, self.miner.quarry.token_mint_key,);
+        assert_keys_eq!(self.pool.internal_mint, self.miner.quarry.token_mint_key);
 
         Ok(())
     }
@@ -113,8 +113,8 @@ impl<'info> Validate<'info> for InitArrowMiner<'info> {
         self.arrow.internal_miner.assert_not_initialized()?;
 
         // ensure we are using the Arrow's pool and vault
-        assert_keys_eq!(self.arrow.pool, *self.pool);
-        assert_keys_eq!(self.arrow.vault, *self.vault);
+        assert_keys_eq!(self.arrow.pool, self.pool);
+        assert_keys_eq!(self.arrow.vault, self.vault);
 
         // validate consistency of miner struct
         self.miner.validate()?;
@@ -134,22 +134,14 @@ impl ArrowMiner {
 
 impl<'info> Validate<'info> for InitMiner<'info> {
     fn validate(&self) -> ProgramResult {
-        assert_keys_eq!(
-            self.quarry.rewarder_key,
-            *self.rewarder,
-            "vendor_miner.quarry.rewarder_key"
-        );
-        assert_ata!(
-            *self.miner_vault,
-            *self.miner,
-            *self.token_mint,
-            "miner_vault"
-        );
-        assert_keys_eq!(
-            self.quarry.token_mint_key,
-            *self.token_mint,
-            "quarry.token_mint_key"
-        );
+        assert_keys_eq!(self.quarry.rewarder_key, self.rewarder);
+
+        // this should be an ATA
+        // If it is not an ATA, the Sunny program will throw an exception.
+        assert_keys_eq!(self.miner_vault.owner, self.miner);
+        assert_keys_eq!(self.miner_vault.mint, self.token_mint);
+
+        assert_keys_eq!(self.quarry.token_mint_key, self.token_mint);
         Ok(())
     }
 }
