@@ -22,7 +22,7 @@ default = []
 [dependencies]
 anchor-lang = ">=0.17.0"
 anchor-spl = ">=0.17.0"
-quarry-mine = { version = "^1.10", features = ["cpi"] }
+quarry-mine = { version = "^1.11", features = ["cpi"] }
 quarry-mint-wrapper = { version = "^1.10", features = ["cpi"] }
 static-pubkey = "1.0.2"
 sunny-anchor = { version = "^0.1", path = "./lib/sunny", features = ["cpi"] }
