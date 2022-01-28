@@ -27,7 +27,7 @@ quarry-mint-wrapper = { version = "^1.10", features = ["cpi"] }
 static-pubkey = "1.0.2"
 sunny-anchor = { version = "^0.1", path = "./lib/sunny", features = ["cpi"] }
 num-traits = "0.2"
-vipers = "^1.5.5"
+vipers = "^1.5.9"
 spl-associated-token-account = { version = "1.0.3", features = [
     "no-entrypoint"
 ] }
