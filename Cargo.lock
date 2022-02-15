@@ -951,9 +951,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mint-wrapper"
-version = "1.11.3"
+version = "1.11.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d282c019033a37d5f7b6ec4dc8e4873f9de54d639d41aa5104aa58b82f6164e1"
+checksum = "2ed21bc001b670869c2d1bfe26fc850393353744b566a7324af2d6dc67814a68"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -1403,9 +1403,9 @@ checksum = "5fecdca9a5291cc2b8dcf7dc02453fee791a280f3743cb0905f8822ae463b3fe"
 
 [[package]]
 name = "vipers"
-version = "1.5.5"
+version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "344716a0a37af7570a1402541e48b42a09def1d453c031aefcd05944d2c4488c"
+checksum = "a9a8dc4892bbdf8c166bc77882e459324209a1f1d315f336a9622605da340450"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
