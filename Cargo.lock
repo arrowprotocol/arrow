@@ -937,9 +937,9 @@ dependencies = [
 
 [[package]]
 name = "quarry-mine"
-version = "1.11.3"
+version = "1.11.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "45a67c003c3e1f38fdf0dd328ad5094427ebafd5c97d208c039765d21fabd6e4"
+checksum = "2c95c49772ea7eac5e42bed30e9be1e0117659921d9c2b3e6e606156bb51f640"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -1403,9 +1403,9 @@ checksum = "5fecdca9a5291cc2b8dcf7dc02453fee791a280f3743cb0905f8822ae463b3fe"
 
 [[package]]
 name = "vipers"
-version = "1.5.5"
+version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "344716a0a37af7570a1402541e48b42a09def1d453c031aefcd05944d2c4488c"
+checksum = "a9a8dc4892bbdf8c166bc77882e459324209a1f1d315f336a9622605da340450"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
