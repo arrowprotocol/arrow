@@ -7,7 +7,7 @@ use vipers::*;
 
 impl<'info> Claim<'info> {
     /// Claims tokens.
-    pub fn claim(&self) -> ProgramResult {
+    pub fn claim(&self) -> Result<()> {
         sunny_anchor::cpi::claim_rewards(CpiContext::new(
             self.sunny_program.to_account_info(),
             sunny_anchor::cpi::accounts::ClaimRewards {
@@ -36,7 +36,7 @@ impl<'info> Claim<'info> {
 }
 
 impl<'info> Validate<'info> for Claim<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         let rewards_mint = self.rewards_token_mint.key();
 
         // rewards token accounts

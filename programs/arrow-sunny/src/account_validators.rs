@@ -7,7 +7,7 @@ use crate::*;
 
 impl<'info> StakeCommon<'info> {
     /// Validates these accounts against an [ArrowMiner].
-    pub fn validate_miner(&self, miner: &ArrowMiner) -> ProgramResult {
+    pub fn validate_miner(&self, miner: &ArrowMiner) -> Result<()> {
         assert_keys_eq!(self.rewarder, miner.rewarder, "rewarder");
         assert_keys_eq!(self.quarry, miner.quarry, "quarry");
         assert_keys_eq!(self.miner, miner.miner, "miner");

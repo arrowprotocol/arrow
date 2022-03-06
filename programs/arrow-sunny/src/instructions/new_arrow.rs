@@ -6,7 +6,7 @@ use vipers::{assert_keys_eq, invariant, validate::Validate};
 
 impl<'info> NewArrow<'info> {
     /// Initializes the vault.
-    pub fn init_vault(&self, bump: u8) -> ProgramResult {
+    pub fn init_vault(&self, bump: u8) -> Result<()> {
         sunny_anchor::cpi::init_vault(
             CpiContext::new(
                 self.sunny_program.to_account_info(),
@@ -23,7 +23,7 @@ impl<'info> NewArrow<'info> {
     }
 
     /// Initializes a new arrow.
-    pub fn init_arrow(&mut self, bump: u8) -> ProgramResult {
+    pub fn init_arrow(&mut self, bump: u8) -> Result<()> {
         let arrow = &mut self.arrow;
         arrow.mint = self.arrow_mint.key();
         arrow.bump = bump;
@@ -46,7 +46,7 @@ impl<'info> NewArrow<'info> {
 
 impl<'info> NewArrow<'info> {
     /// Validate the [Arrow]'s mint.
-    fn validate_arrow_mint(&self) -> ProgramResult {
+    fn validate_arrow_mint(&self) -> Result<()> {
         assert_keys_eq!(
             self.arrow_mint.mint_authority.unwrap(),
             *self.arrow,
@@ -68,7 +68,7 @@ impl<'info> NewArrow<'info> {
 }
 
 impl<'info> Validate<'info> for NewArrow<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         self.validate_arrow_mint()?;
         // ensure that the provided vendor mint
         // corresponds to the pool.

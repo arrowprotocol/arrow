@@ -1,4 +1,4 @@
-import { Coder } from "@project-serum/anchor";
+import { BorshCoder } from "@project-serum/anchor";
 import type { RewarderData } from "@quarryprotocol/quarry-sdk";
 import {
   findMinerAddress,
@@ -48,7 +48,7 @@ export interface ArrowPrograms {
   ArrowSunny: ArrowSunnyProgram;
 }
 
-const QUARRY_MINE_CODER = new Coder(QUARRY_IDLS.Mine);
+const QUARRY_MINE_CODER = new BorshCoder(QUARRY_IDLS.Mine);
 
 export const parseRewarder = (info: KeyedAccountInfo): RewarderData =>
   QUARRY_MINE_CODER.accounts.decode<RewarderData>(
