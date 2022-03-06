@@ -8,7 +8,7 @@ use vipers::*;
 
 impl<'info> WithdrawRewardsToBeneficiary<'info> {
     /// Withdraws rewards tokens to the beneficiary.
-    pub fn withdraw_rewards_to_beneficiary(&mut self) -> ProgramResult {
+    pub fn withdraw_rewards_to_beneficiary(&mut self) -> Result<()> {
         let signer_seeds: &[&[&[u8]]] = gen_arrow_signer_seeds!(self.arrow);
         sunny_anchor::cpi::withdraw_from_vault(
             CpiContext::new(
@@ -69,7 +69,7 @@ impl<'info> WithdrawRewardsToBeneficiary<'info> {
 }
 
 impl<'info> Validate<'info> for WithdrawRewardsToBeneficiary<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         let rewards_mint = self.beneficiary_account.mint;
         let miner = self.arrow.miner_for_rewards(rewards_mint)?;
 

@@ -5,10 +5,10 @@ with pkgs;
 pkgs.buildEnv {
   name = "ci";
   paths = with pkgs;
-    (pkgs.lib.optionals pkgs.stdenv.isLinux [ libudev ]) ++ [
+    (pkgs.lib.optionals pkgs.stdenv.isLinux [ udev ]) ++ [
       cargo-workspaces
-      anchor-0_19_0
-      solana-install
+      anchor-0_22_0
+      solana-basic
 
       nodejs
       yarn

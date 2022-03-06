@@ -8,35 +8,35 @@ declare_id!("SPQR4kT3q2oUKEJes2L6NNSBCiPW9SfuhkuqC9bp6Sx");
 pub mod sunny_anchor {
     use super::*;
 
-    pub fn init_vault(_ctx: Context<InitVault>, _bump: u8) -> ProgramResult {
+    pub fn init_vault(_ctx: Context<InitVault>, _bump: u8) -> Result<()> {
         Ok(())
     }
 
-    pub fn init_miner(_ctx: Context<InitMiner>, _bump: u8) -> ProgramResult {
+    pub fn init_miner(_ctx: Context<InitMiner>, _bump: u8) -> Result<()> {
         Ok(())
     }
 
-    pub fn deposit_vendor(_ctx: Context<QuarryStakeVendor>) -> ProgramResult {
+    pub fn deposit_vendor(_ctx: Context<QuarryStakeVendor>) -> Result<()> {
         Ok(())
     }
 
-    pub fn stake_internal(_ctx: Context<QuarryStakeInternal>) -> ProgramResult {
+    pub fn stake_internal(_ctx: Context<QuarryStakeInternal>) -> Result<()> {
         Ok(())
     }
 
-    pub fn unstake_internal(_ctx: Context<QuarryStakeInternal>, _amount: u64) -> ProgramResult {
+    pub fn unstake_internal(_ctx: Context<QuarryStakeInternal>, _amount: u64) -> Result<()> {
         Ok(())
     }
 
-    pub fn withdraw_vendor(_ctx: Context<QuarryStakeVendor>, _amount: u64) -> ProgramResult {
+    pub fn withdraw_vendor(_ctx: Context<QuarryStakeVendor>, _amount: u64) -> Result<()> {
         Ok(())
     }
 
-    pub fn withdraw_from_vault(_ctx: Context<WithdrawFromVault>) -> ProgramResult {
+    pub fn withdraw_from_vault(_ctx: Context<WithdrawFromVault>) -> Result<()> {
         Ok(())
     }
 
-    pub fn claim_rewards(_ctx: Context<ClaimRewards>) -> ProgramResult {
+    pub fn claim_rewards(_ctx: Context<ClaimRewards>) -> Result<()> {
         Ok(())
     }
 }

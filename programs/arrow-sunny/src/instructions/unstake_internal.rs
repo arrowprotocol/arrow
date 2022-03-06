@@ -7,7 +7,7 @@ use vipers::{assert_keys_eq, validate::Validate};
 
 impl<'info> UnstakeInternal<'info> {
     /// Unstakes from the internal miner and burns arrow tokens.
-    pub fn unstake_internal(&self, amount: u64) -> ProgramResult {
+    pub fn unstake_internal(&self, amount: u64) -> Result<()> {
         self.arrow_stake
             .burn(amount, self.stake.token_program.to_account_info())?;
         self.stake.sunny_unstake_internal(amount)?;
@@ -24,7 +24,7 @@ impl<'info> UnstakeInternal<'info> {
 }
 
 impl<'info> ArrowStake<'info> {
-    fn burn(&self, amount: u64, token_program: AccountInfo<'info>) -> ProgramResult {
+    fn burn(&self, amount: u64, token_program: AccountInfo<'info>) -> Result<()> {
         token::burn(
             CpiContext::new(
                 token_program,
@@ -40,7 +40,7 @@ impl<'info> ArrowStake<'info> {
 }
 
 impl<'info> StakeInternal<'info> {
-    fn sunny_unstake_internal(&self, amount: u64) -> ProgramResult {
+    fn sunny_unstake_internal(&self, amount: u64) -> Result<()> {
         let signer_seeds: &[&[&[u8]]] = gen_arrow_signer_seeds!(self.arrow);
         sunny_anchor::cpi::unstake_internal(
             CpiContext::new(
@@ -74,7 +74,7 @@ impl<'info> StakeInternal<'info> {
 }
 
 impl<'info> Validate<'info> for UnstakeInternal<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         assert_keys_eq!(self.arrow_stake.arrow_mint, self.stake.arrow.mint);
         self.arrow_stake.validate()?;
         self.stake.validate()?;
@@ -83,7 +83,7 @@ impl<'info> Validate<'info> for UnstakeInternal<'info> {
 }
 
 impl<'info> Validate<'info> for ArrowStake<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         assert_keys_eq!(self.depositor_arrow_tokens.mint, self.arrow_mint);
         assert_keys_eq!(self.depositor_arrow_tokens.owner, self.depositor);
         Ok(())

@@ -1,4 +1,4 @@
-import { Coder } from "@project-serum/anchor";
+import { BorshCoder } from "@project-serum/anchor";
 import type { AnchorTypes } from "@saberhq/anchor-contrib";
 import { generateErrorMap } from "@saberhq/anchor-contrib";
 
@@ -1984,7 +1984,7 @@ export const SunnyPoolQuarryJSON: SunnyPoolQuarryIDL = {
 };
 export const SunnyPoolQuarryErrors = generateErrorMap(SunnyPoolQuarryJSON);
 
-export const SUNNY_CODER = new Coder(SunnyPoolQuarryJSON);
+export const SUNNY_CODER = new BorshCoder(SunnyPoolQuarryJSON);
 
 type SunnyTypes = AnchorTypes<SunnyPoolQuarryIDL>;
 

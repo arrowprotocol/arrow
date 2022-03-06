@@ -6,7 +6,7 @@ use vipers::{assert_keys_eq, validate::Validate};
 
 impl<'info> WithdrawVendorTokens<'info> {
     /// Withdraws vendor tokens
-    pub fn withdraw_vendor_tokens(&self, amount: u64) -> ProgramResult {
+    pub fn withdraw_vendor_tokens(&self, amount: u64) -> Result<()> {
         self.stake
             .withdraw_vendor_tokens(self.sunny_pool_fee_destination.to_account_info(), amount)
     }
@@ -19,7 +19,7 @@ impl<'info> DepositVendor<'info> {
         &self,
         fee_destination: AccountInfo<'info>,
         amount: u64,
-    ) -> ProgramResult {
+    ) -> Result<()> {
         let signer_seeds: &[&[&[u8]]] = gen_arrow_signer_seeds!(self.arrow);
         sunny_anchor::cpi::withdraw_vendor(
             CpiContext::new(
@@ -64,7 +64,7 @@ impl<'info> DepositVendor<'info> {
 }
 
 impl<'info> Validate<'info> for WithdrawVendorTokens<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         self.stake.validate()?;
         assert_keys_eq!(self.sunny_pool_fee_destination.owner, self.stake.arrow.pool);
         assert_keys_eq!(

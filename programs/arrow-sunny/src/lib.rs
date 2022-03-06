@@ -15,7 +15,7 @@ pub mod state;
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, Token, TokenAccount};
 use sunny_anchor::{Pool, Vault};
-use vipers::validate::Validate;
+use vipers::prelude::*;
 
 pub use events::*;
 pub use state::*;
@@ -29,7 +29,8 @@ pub mod arrow_sunny {
 
     /// Creates a new [Arrow].
     #[access_control(ctx.accounts.validate())]
-    pub fn new_arrow(ctx: Context<NewArrow>, bump: u8, vault_bump: u8) -> ProgramResult {
+    pub fn new_arrow(ctx: Context<NewArrow>, _bump: u8, vault_bump: u8) -> Result<()> {
+        let bump = unwrap_bump!(ctx, "arrow");
         ctx.accounts.init_vault(vault_bump)?;
         ctx.accounts.init_arrow(bump)
     }
@@ -39,7 +40,7 @@ pub mod arrow_sunny {
     pub fn init_arrow_internal_miner(
         ctx: Context<InitArrowMiner>,
         internal_miner_bump: u8,
-    ) -> ProgramResult {
+    ) -> Result<()> {
         ctx.accounts.init_arrow_internal_miner(internal_miner_bump)
     }
 
@@ -48,13 +49,13 @@ pub mod arrow_sunny {
     pub fn init_arrow_vendor_miner(
         ctx: Context<InitArrowMiner>,
         vendor_miner_bump: u8,
-    ) -> ProgramResult {
+    ) -> Result<()> {
         ctx.accounts.init_arrow_vendor_miner(vendor_miner_bump)
     }
 
     /// Stakes tokens into an [Arrow].
     #[access_control(ctx.accounts.validate())]
-    pub fn deposit_vendor(ctx: Context<DepositVendor>, amount: u64) -> ProgramResult {
+    pub fn deposit_vendor(ctx: Context<DepositVendor>, amount: u64) -> Result<()> {
         ctx.accounts.deposit_vendor(amount)
     }
 
@@ -63,13 +64,13 @@ pub mod arrow_sunny {
     /// Anybody can call this function, but ideally it is called right after [deposit_vendor].
     /// This ensures that the staked tokens are always earning maximum yield.
     #[access_control(ctx.accounts.validate())]
-    pub fn stake_internal(ctx: Context<StakeInternal>) -> ProgramResult {
+    pub fn stake_internal(ctx: Context<StakeInternal>) -> Result<()> {
         ctx.accounts.stake_internal()
     }
 
     /// Unstakes tokens from an [Arrow].
     #[access_control(ctx.accounts.validate())]
-    pub fn unstake_internal(ctx: Context<UnstakeInternal>, amount: u64) -> ProgramResult {
+    pub fn unstake_internal(ctx: Context<UnstakeInternal>, amount: u64) -> Result<()> {
         ctx.accounts.unstake_internal(amount)
     }
 
@@ -78,17 +79,14 @@ pub mod arrow_sunny {
     /// **IMPORTANT**: A user should take care to ensure that this is called in the same transaction
     /// as [unstake_internal], otherwise someone else can withdraw their tokens.
     #[access_control(ctx.accounts.validate())]
-    pub fn withdraw_vendor_tokens(
-        ctx: Context<WithdrawVendorTokens>,
-        amount: u64,
-    ) -> ProgramResult {
+    pub fn withdraw_vendor_tokens(ctx: Context<WithdrawVendorTokens>, amount: u64) -> Result<()> {
         ctx.accounts.withdraw_vendor_tokens(amount)
     }
 
     /// Claims tokens, keeping them within the vault.
     /// Fees are not removed from the vault at this time.
     #[access_control(ctx.accounts.validate())]
-    pub fn claim(ctx: Context<Claim>) -> ProgramResult {
+    pub fn claim(ctx: Context<Claim>) -> Result<()> {
         ctx.accounts.claim()
     }
 
@@ -97,7 +95,7 @@ pub mod arrow_sunny {
     #[access_control(ctx.accounts.validate())]
     pub fn withdraw_rewards_to_beneficiary(
         ctx: Context<WithdrawRewardsToBeneficiary>,
-    ) -> ProgramResult {
+    ) -> Result<()> {
         ctx.accounts.withdraw_rewards_to_beneficiary()
     }
 }
@@ -108,7 +106,6 @@ pub mod arrow_sunny {
 
 /// Accounts for [arrow_sunny::new_arrow].
 #[derive(Accounts)]
-#[instruction(bump: u8)]
 pub struct NewArrow<'info> {
     /// The [Arrow].
     #[account(
@@ -117,7 +114,7 @@ pub struct NewArrow<'info> {
             b"arrow".as_ref(),
             arrow_mint.key().to_bytes().as_ref()
         ],
-        bump = bump,
+        bump,
         payer = payer
     )]
     pub arrow: Box<Account<'info, Arrow>>,
@@ -132,13 +129,14 @@ pub struct NewArrow<'info> {
     pub payer: Signer<'info>,
 
     /// The recipient of the [Arrow]'s rewards.
+    /// CHECK: arbitrary
     pub beneficiary: UncheckedAccount<'info>,
 
     /// The Sunny pool.
     pub pool: Box<Account<'info, Pool>>,
     /// Sunny vault
     #[account(mut)]
-    pub vault: UncheckedAccount<'info>,
+    pub vault: SystemAccount<'info>,
     /// The [Mint] which is staked into pools.
     pub vendor_mint: Box<Account<'info, Mint>>,
 
@@ -186,7 +184,7 @@ pub struct InitMiner<'info> {
     pub quarry: Box<Account<'info, quarry_mine::Quarry>>,
     /// The miner. This is unchecked as it should not be initialized.
     #[account(mut)]
-    pub miner: UncheckedAccount<'info>,
+    pub miner: SystemAccount<'info>,
     /// Account holding the miner's tokens
     /// This should be an ATA of the miner, otherwise
     /// Sunny will throw an exception.
@@ -291,14 +289,18 @@ pub struct ArrowStake<'info> {
 #[derive(Accounts)]
 pub struct StakeCommon<'info> {
     /// Rewarder
+    /// CHECK: equality
     pub rewarder: UncheckedAccount<'info>,
     /// Quarry
+    /// CHECK: equality
     #[account(mut)]
     pub quarry: UncheckedAccount<'info>,
     /// Miner
+    /// CHECK: equality
     #[account(mut)]
     pub miner: UncheckedAccount<'info>,
     /// Miner vault
+    /// CHECK: equality
     #[account(mut)]
     pub miner_vault: UncheckedAccount<'info>,
 }
@@ -325,10 +327,12 @@ pub struct Claim<'info> {
 
     // Quarry Mine accounts
     /// This account just gets equality checked, so we don't need to deserialize it.
+    /// CHECK: equality
     #[account(mut)]
     pub claim_fee_token_account: UncheckedAccount<'info>,
     /// This account is a dummy and doesn't get used. It must have the
     /// Quarry mint, but this is checked by Sunny.
+    /// CHECK: equality
     #[account(mut)]
     pub stake_token_account: UncheckedAccount<'info>,
     /// Staking accounts
@@ -338,6 +342,7 @@ pub struct Claim<'info> {
     // These are checked by Sunny, so we do not check them here to save
     // compute units.
     /// Quarry mint wrapper
+    /// CHECK: compute units
     #[account(mut)]
     pub mint_wrapper: UncheckedAccount<'info>,
     /// Quarry minter
@@ -350,9 +355,11 @@ pub struct Claim<'info> {
     // Sunny accounts
     // equality checked, so no need to deserialize
     /// Sunny pool
+    /// CHECK: equality
     #[account(mut)]
     pub pool: UncheckedAccount<'info>,
     /// Sunny vault
+    /// CHECK: equality
     #[account(mut)]
     pub vault: UncheckedAccount<'info>,
 
@@ -405,7 +412,7 @@ pub struct WithdrawRewardsToBeneficiary<'info> {
     pub token_program: Program<'info, Token>,
 }
 
-#[error]
+#[error_code]
 pub enum ErrorCode {
     #[msg("Invalid rewards mint.")]
     InvalidRewardsMint,

@@ -6,7 +6,7 @@ use vipers::{assert_keys_eq, invariant, validate::Validate};
 
 impl<'info> InitArrowMiner<'info> {
     /// Initializes the internal miner.
-    pub fn init_arrow_internal_miner(&mut self, internal_miner_bump: u8) -> ProgramResult {
+    pub fn init_arrow_internal_miner(&mut self, internal_miner_bump: u8) -> Result<()> {
         self.validate_init_internal()?;
         let arrow = &mut self.arrow;
         arrow.internal_miner =
@@ -16,7 +16,7 @@ impl<'info> InitArrowMiner<'info> {
     }
 
     /// Initializes the vendor miner.
-    pub fn init_arrow_vendor_miner(&mut self, vendor_miner_bump: u8) -> ProgramResult {
+    pub fn init_arrow_vendor_miner(&mut self, vendor_miner_bump: u8) -> Result<()> {
         self.validate_init_vendor()?;
         let arrow = &mut self.arrow;
         arrow.vendor_miner =
@@ -25,7 +25,7 @@ impl<'info> InitArrowMiner<'info> {
         Ok(())
     }
 
-    fn init_miner(&self, bump: u8) -> ProgramResult {
+    fn init_miner(&self, bump: u8) -> Result<()> {
         sunny_anchor::cpi::init_miner(
             CpiContext::new(
                 self.sunny_program.to_account_info(),
@@ -83,7 +83,7 @@ impl<'info> ArrowMiner {
 }
 
 impl<'info> InitArrowMiner<'info> {
-    fn validate_init_vendor(&self) -> ProgramResult {
+    fn validate_init_vendor(&self) -> Result<()> {
         self.arrow.vendor_miner.assert_not_initialized()?;
 
         assert_keys_eq!(self.pool.quarry, self.miner.quarry);
@@ -97,7 +97,7 @@ impl<'info> InitArrowMiner<'info> {
         Ok(())
     }
 
-    fn validate_init_internal(&self) -> ProgramResult {
+    fn validate_init_internal(&self) -> Result<()> {
         self.arrow.internal_miner.assert_not_initialized()?;
 
         // validate Pool fields
@@ -108,7 +108,7 @@ impl<'info> InitArrowMiner<'info> {
 }
 
 impl<'info> Validate<'info> for InitArrowMiner<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         // ensure our Arrow has not yet been initialized.
         self.arrow.internal_miner.assert_not_initialized()?;
 
@@ -123,7 +123,7 @@ impl<'info> Validate<'info> for InitArrowMiner<'info> {
 }
 
 impl ArrowMiner {
-    fn assert_not_initialized(&self) -> ProgramResult {
+    fn assert_not_initialized(&self) -> Result<()> {
         invariant!(
             *self == ArrowMiner::default(),
             InitArrowMinersAlreadyInitialized
@@ -133,7 +133,7 @@ impl ArrowMiner {
 }
 
 impl<'info> Validate<'info> for InitMiner<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         assert_keys_eq!(self.quarry.rewarder_key, self.rewarder);
 
         // this should be an ATA

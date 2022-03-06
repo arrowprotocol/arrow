@@ -8,7 +8,7 @@ use vipers::*;
 
 impl<'info> DepositVendor<'info> {
     /// Deposits into the vendor.
-    pub fn deposit_vendor(&self, amount: u64) -> ProgramResult {
+    pub fn deposit_vendor(&self, amount: u64) -> Result<()> {
         token::transfer(
             CpiContext::new(
                 self.token_program.to_account_info(),
@@ -70,7 +70,7 @@ impl<'info> DepositVendor<'info> {
 }
 
 impl<'info> Validate<'info> for DepositVendor<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         assert_keys_eq!(self.arrow_stake.arrow_mint, self.arrow.mint);
 
         // depositor

@@ -6,7 +6,7 @@ use vipers::{assert_keys_eq, validate::Validate};
 
 impl<'info> StakeInternal<'info> {
     /// Stakes the full contents of the vault into the internal miner.
-    pub fn stake_internal(&self) -> ProgramResult {
+    pub fn stake_internal(&self) -> Result<()> {
         let signer_seeds: &[&[&[u8]]] = gen_arrow_signer_seeds!(self.arrow);
         sunny_anchor::cpi::stake_internal(
             CpiContext::new(
@@ -37,7 +37,7 @@ impl<'info> StakeInternal<'info> {
 }
 
 impl<'info> Validate<'info> for StakeInternal<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         assert_keys_eq!(self.arrow.internal_miner.mint, self.internal_mint);
         assert_keys_eq!(
             self.arrow.internal_miner.vault_staked_token_account,
