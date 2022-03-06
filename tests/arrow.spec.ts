@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { expectTX } from "@saberhq/chai-solana";
 import {
   createMint,
