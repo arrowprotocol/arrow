@@ -1,6 +1,6 @@
 [package]
 name = "sunny-anchor"
-version = "0.1.1"
+version = "0.2.0"
 description = "Sunny Aggregator Anchor client."
 edition = "2021"
 homepage = "https://arrowprotocol.com"
@@ -20,5 +20,5 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = ">=0.17.0"
-anchor-spl = ">=0.17.0"
+anchor-lang = "^0.22"
+anchor-spl = "^0.22"
