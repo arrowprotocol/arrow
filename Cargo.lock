@@ -221,7 +221,7 @@ dependencies = [
  "anchor-spl",
  "num-traits",
  "quarry-mine",
- "quarry-mint-wrapper",
+ "quarry-mint-wrapper 3.0.0",
  "spl-associated-token-account",
  "static-pubkey",
  "sunny-anchor",
@@ -910,14 +910,14 @@ dependencies = [
 
 [[package]]
 name = "quarry-mine"
-version = "3.0.0"
+version = "4.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "029a4d6519dd2b7ee53c0b4e95014591e2614d29f4330088a2f744c5efcad4ca"
+checksum = "9d83fee183fc3f51247ea3c869791134b181e78d8d30e91004ec76bdb4da948a"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
  "num-traits",
- "quarry-mint-wrapper",
+ "quarry-mint-wrapper 4.1.0",
  "spl-math",
  "vipers",
 ]
@@ -927,6 +927,17 @@ name = "quarry-mint-wrapper"
 version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4e60652a19b72968bf788fe24a01ea72db17eb4569405d5251c12d02a1be674"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+ "vipers",
+]
+
+[[package]]
+name = "quarry-mint-wrapper"
+version = "4.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b1b9066759f71148d16badac6a9bedf53d14a7317fd3a413aed7e781ab59978"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
