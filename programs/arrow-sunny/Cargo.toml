@@ -20,7 +20,7 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = "^0.22"
+anchor-lang = "^0.24"
 anchor-spl = "^0.22"
 quarry-mine = { version = "^3", features = ["cpi"] }
 quarry-mint-wrapper = { version = "^3", features = ["cpi"] }
