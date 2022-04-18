@@ -221,7 +221,7 @@ dependencies = [
  "anchor-spl",
  "num-traits",
  "quarry-mine",
- "quarry-mint-wrapper",
+ "quarry-mint-wrapper 3.0.0",
  "spl-associated-token-account",
  "static-pubkey",
  "sunny-anchor",
@@ -642,6 +642,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "hex"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+
+[[package]]
 name = "hmac"
 version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -910,15 +916,17 @@ dependencies = [
 
 [[package]]
 name = "quarry-mine"
-version = "3.0.0"
+version = "5.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "029a4d6519dd2b7ee53c0b4e95014591e2614d29f4330088a2f744c5efcad4ca"
+checksum = "137724bb4a7fbf7ac6971a3447a926cad58899d29ebfc07e0992d02362aaf0df"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
  "num-traits",
- "quarry-mint-wrapper",
+ "quarry-mint-wrapper 5.0.2",
+ "solana-security-txt",
  "spl-math",
+ "u128",
  "vipers",
 ]
 
@@ -930,6 +938,18 @@ checksum = "c4e60652a19b72968bf788fe24a01ea72db17eb4569405d5251c12d02a1be674"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
+ "vipers",
+]
+
+[[package]]
+name = "quarry-mint-wrapper"
+version = "5.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e4de715534f03cd8b2e120dbb02632e9bec8eb7b4beb6d84044033852a2f166"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+ "solana-security-txt",
  "vipers",
 ]
 
@@ -1215,6 +1235,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "solana-security-txt"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f14189df19df7f3977a7ea236ccae6cdc40855ab5baf1ab2796a091ef5c490d1"
+
+[[package]]
 name = "spl-associated-token-account"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1236,7 +1262,7 @@ dependencies = [
  "num-traits",
  "solana-program",
  "thiserror",
- "uint",
+ "uint 0.8.5",
 ]
 
 [[package]]
@@ -1332,6 +1358,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
 
 [[package]]
+name = "u128"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ba924bf1e6b59ea8f1bbb8c7c5998fbc22c6a544e34446ee336f693ea86ccef3"
+dependencies = [
+ "uint 0.9.1",
+]
+
+[[package]]
 name = "uint"
 version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1340,6 +1375,18 @@ dependencies = [
  "byteorder",
  "crunchy",
  "rustc-hex",
+ "static_assertions",
+]
+
+[[package]]
+name = "uint"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6470ab50f482bde894a037a57064480a246dbfdd5960bd65a44824693f08da5f"
+dependencies = [
+ "byteorder",
+ "crunchy",
+ "hex",
  "static_assertions",
 ]
 
