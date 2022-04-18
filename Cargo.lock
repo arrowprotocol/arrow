@@ -221,7 +221,7 @@ dependencies = [
  "anchor-spl",
  "num-traits",
  "quarry-mine",
- "quarry-mint-wrapper",
+ "quarry-mint-wrapper 5.0.2",
  "spl-associated-token-account",
  "static-pubkey",
  "sunny-anchor",
@@ -917,7 +917,7 @@ dependencies = [
  "anchor-lang",
  "anchor-spl",
  "num-traits",
- "quarry-mint-wrapper",
+ "quarry-mint-wrapper 3.0.0",
  "spl-math",
  "vipers",
 ]
@@ -930,6 +930,18 @@ checksum = "c4e60652a19b72968bf788fe24a01ea72db17eb4569405d5251c12d02a1be674"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
+ "vipers",
+]
+
+[[package]]
+name = "quarry-mint-wrapper"
+version = "5.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e4de715534f03cd8b2e120dbb02632e9bec8eb7b4beb6d84044033852a2f166"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+ "solana-security-txt",
  "vipers",
 ]
 
@@ -1213,6 +1225,12 @@ dependencies = [
  "rustversion",
  "syn",
 ]
+
+[[package]]
+name = "solana-security-txt"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f14189df19df7f3977a7ea236ccae6cdc40855ab5baf1ab2796a091ef5c490d1"
 
 [[package]]
 name = "spl-associated-token-account"
