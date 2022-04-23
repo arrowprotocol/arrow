@@ -1,6 +1,6 @@
 [package]
 name = "arrow-sunny"
-version = "0.2.0"
+version = "0.3.0"
 description = "Sunny protocol integration for Arrow."
 edition = "2021"
 homepage = "https://arrowprotocol.com"
@@ -25,7 +25,7 @@ anchor-spl = "^0.24"
 quarry-mine = { version = "^5", features = ["cpi"] }
 quarry-mint-wrapper = { version = "^5", features = ["cpi"] }
 static-pubkey = "1.0.2"
-sunny-anchor = { version = "^0.2", path = "./lib/sunny", features = ["cpi"] }
+sunny-anchor = { version = "0.3.0", path = "./lib/sunny", features = ["cpi"] }
 num-traits = "0.2"
 vipers = { version = "^2", features = ["spl-associated-token-account"] }
 spl-associated-token-account = { version = "1.0.3", features = [
