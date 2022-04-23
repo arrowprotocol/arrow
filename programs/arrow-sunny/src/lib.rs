@@ -115,6 +115,7 @@ pub struct NewArrow<'info> {
             arrow_mint.key().to_bytes().as_ref()
         ],
         bump,
+        space = 8 + Arrow::LEN,
         payer = payer
     )]
     pub arrow: Box<Account<'info, Arrow>>,

@@ -20,10 +20,10 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = "^0.22"
-anchor-spl = "^0.22"
-quarry-mine = { version = "^3", features = ["cpi"] }
-quarry-mint-wrapper = { version = "^3", features = ["cpi"] }
+anchor-lang = "^0.24"
+anchor-spl = "^0.24"
+quarry-mine = { version = "^5", features = ["cpi"] }
+quarry-mint-wrapper = { version = "^5", features = ["cpi"] }
 static-pubkey = "1.0.2"
 sunny-anchor = { version = "^0.2", path = "./lib/sunny", features = ["cpi"] }
 num-traits = "0.2"

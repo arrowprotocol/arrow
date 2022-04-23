@@ -1,7 +1,7 @@
 //! Account structs
 #![deny(missing_docs)]
 
-use anchor_lang::prelude::*;
+use anchor_lang::{prelude::*, solana_program::pubkey::PUBKEY_BYTES};
 
 /// An Arrow.
 #[account]
@@ -24,6 +24,11 @@ pub struct Arrow {
     pub vendor_miner: ArrowMiner,
     /// Internal miner
     pub internal_miner: ArrowMiner,
+}
+
+impl Arrow {
+    /// Number of bytes in an [Arrow].
+    pub const LEN: usize = PUBKEY_BYTES + 1 + PUBKEY_BYTES * 3 + ArrowMiner::LEN * 2;
 }
 
 /// Miner information for an [Arrow].
@@ -53,4 +58,9 @@ pub struct ArrowMiner {
     pub vault_rewards_token_account: Pubkey,
     /// The account holding the rewards fees.
     pub sunny_pool_rewards_fee_account: Pubkey,
+}
+
+impl ArrowMiner {
+    /// Number of bytes in an [ArrowMiner].
+    pub const LEN: usize = PUBKEY_BYTES * 11;
 }

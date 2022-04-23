@@ -30,7 +30,7 @@ impl<'info> ArrowStake<'info> {
                 token_program,
                 token::Burn {
                     mint: self.arrow_mint.to_account_info(),
-                    to: self.depositor_arrow_tokens.to_account_info(),
+                    from: self.depositor_arrow_tokens.to_account_info(),
                     authority: self.depositor.to_account_info(),
                 },
             ),
