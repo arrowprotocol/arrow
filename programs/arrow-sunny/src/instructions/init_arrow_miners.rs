@@ -134,7 +134,7 @@ impl ArrowMiner {
 
 impl<'info> Validate<'info> for InitMiner<'info> {
     fn validate(&self) -> Result<()> {
-        assert_keys_eq!(self.quarry.rewarder_key, self.rewarder);
+        assert_keys_eq!(self.quarry.rewarder, self.rewarder);
 
         // this should be an ATA
         // If it is not an ATA, the Sunny program will throw an exception.
